@@ -54,6 +54,11 @@
   // ---------------------------------------------------------------------------
   // Misc Util Functions
   // ---------------------------------------------------------------------------
+  //Alvaro: creado como auxiliar para probar el cambio de pos
+  function start_aux () {
+    var START_FEN_aux = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
+    return fenToObj(START_FEN_aux)
+  }
 
   function throttle (f, interval, scope) {
     var timeout = 0
@@ -359,7 +364,6 @@
 
       currentRow = currentRow - 1
     }
-
     return position
   }
 
