@@ -11,6 +11,27 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+Route::get('/', function () {
+    return view('home');
 });
+Route::get('/home', function () {
+    return view('home');
+});
+//login y registro de laravel
+Auth::routes();
+
+//tablero
+Route::get('/board', function () {
+    return view('board');
+});
+//Rutas para insertar datos en la DB
+Route::get('/registrar', 'UserController@devolverFormulario');
+Route::post('/registrar', 'UserController@create');
+//Route::post('/register', 'UserController@create');
+Route::get('/entrar', 'UserController@entrar');
+Route::post('/entrar', 'UserController@iniciado');
+//Route::post('/registrar', 'UserController@create');
+Route::get('/salir', 'UserController@logOut');
