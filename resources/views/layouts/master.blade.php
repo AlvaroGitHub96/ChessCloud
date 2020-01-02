@@ -12,7 +12,8 @@
         <title>@yield('title')</title>
         <!--<link rel="stylesheet" type="text/css" href="site.css">-->
         <link href="{{ asset('css/site.css') }}" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <!--<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>-->
         <script src="//releases.flowplayer.org/7.0.2/flowplayer.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
@@ -27,33 +28,38 @@
     </head>
 
     <body>
-        @if(Auth::check())
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                <a class="navbar-brand" href="/home">ChessCloud</a>
-                </div>
-                <ul class="nav navbar-nav">
-                <!--<li class="active"><a href="#">Home</a></li>-->
-                <li><a href="/salir">Salir</a></li>
-                <li><a href="#">Perfil</a></li>
-                </ul>
-            </div>
-        </nav>
-        @else
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
+        <main>
+            @if(Auth::check())
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
                     <a class="navbar-brand" href="/home">ChessCloud</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                    <li><span class="navbar-text">Bienvenido {{Auth::User()->name}}</span></li>
+                    <li><a href="#">Perfil</a></li>
+                    <li><a href="/salir">Cerrar Sesión</a></li>
+                    </ul>
                 </div>
-                <ul class="nav navbar-nav">
-                <!--<li class="active"><a href="#">Home</a></li>-->
-                <li><a href="/entrar">Entrar</a></li>
-                <li><a href="/registrar">Registrarse</a></li>
-                </ul>
-            </div>
-        </nav>
-        @endif
-        @yield('content')
+            </nav>
+            @else
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/home">ChessCloud</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                    <!--<li class="active"><a href="#">Home</a></li>-->
+                    <li><a href="/entrar">Entrar</a></li>
+                    <li><a href="/registrar">Registrarse</a></li>
+                    </ul>
+                </div>
+            </nav>
+            @endif
+            @yield('content')
+        </main>
+        <footer class="fixed-bottom">
+            <a>Álvaro Navarro López-Menchero</a>
+        </footer>
     </body>
 </html>

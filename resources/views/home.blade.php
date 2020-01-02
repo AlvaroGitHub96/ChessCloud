@@ -27,7 +27,7 @@
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
                             <h2>
-                            	<span>Bienevenido a <strong>ChessCloud</strong></span>
+                            	<span>Bienvenido a <strong>ChessCloud</strong></span>
                             </h2>
                             <br>
                             <h3>
@@ -35,8 +35,13 @@
                             </h3>
                             <br>
                             <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
-                                <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
+                                @if(Auth::check())
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
+                                @else
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
+                                @endif
                             </div>
                         </div>
                     </div><!-- /header-text -->
@@ -47,7 +52,7 @@
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
                             <h2>
-                            	<span>Bienevenido a <strong>ChessCloud</strong></span>
+                            	<span>Bienvenido a <strong>ChessCloud</strong></span>
                             </h2>
                             <br>
                             <h3>
@@ -55,8 +60,13 @@
                             </h3>
                             <br>
                             <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
-                                <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
+                                @if(Auth::check())
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
+                                @else
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
+                                @endif
                             </div>
                         </div>
                     </div><!-- /header-text -->
@@ -67,7 +77,7 @@
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
                             <h2>
-                            	<span>Bienevenido a <strong>ChessCloud</strong></span>
+                            	<span>Bienvenido a <strong>ChessCloud</strong></span>
                             </h2>
                             <br>
                             <h3>
@@ -75,8 +85,13 @@
                             </h3>
                             <br>
                             <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
-                                <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
+                                @if(Auth::check())
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
+                                @else
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
+                                @endif
                             </div>
                         </div>
                     </div><!-- /header-text -->
