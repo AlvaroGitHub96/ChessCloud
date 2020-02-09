@@ -61,11 +61,11 @@ img {
 }
 
 .carousel-control.left span {
-	padding: 15px;
+	padding: 0px;
 }
 
 .carousel-control.right span {
-	padding: 15px;
+	padding: 0px;
 }
 
 .carousel-control .glyphicon-chevron-left, 

@@ -39,4 +39,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($password){
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Rol', 'rol_users', 'user_id', 'rol_id');
+    }
 }
