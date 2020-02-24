@@ -12,22 +12,24 @@ class PlayersTableSeeder extends Seeder
     public function run()
     {
         DB::table('players')->delete();
-        $TAM = 100;
+        $TAM = 100;        
         for($i = 0;$i < $TAM;$i++){
+            $ids = 0;
             $names = $this->randName();
             $surnames = $this->randSurname();
             $pais = $this->randCountry();
-            $elo = rand(0,3000);
+            $elo = rand(0,2800);
             $cantidad_titulos = 9;
             $titulo = rand(0,$cantidad_titulos);
             if($elo<1000){$elo=0;}
             DB::table('players')->insert([
+                'id' => $ids,
                 'name' => $names,
                 'surname' => $surnames,
                 'ranking' => $elo,
                 'country' => $pais,
                 'id_title' =>$titulo,
-                'colour' => rand(0,1)]);//0 white, 1 black
+                ]);//'colour' => rand(0,1)//colour: 0 white, 1 black
         }
 
     }

@@ -35,3 +35,7 @@ Route::get('/entrar', 'UserController@entrar');
 Route::post('/entrar', 'UserController@iniciado');
 //Route::post('/registrar', 'UserController@create');
 Route::get('/salir', 'UserController@logOut');
+
+//modificar usuario
+Route::get('/modificarUsuario', 'UserController@modificarDatos')->middleware('auth');
+Route::post('/modificarUsuario', 'UserController@update');

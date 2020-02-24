@@ -72,4 +72,37 @@ class UserController extends Controller
         Auth::logout();
         return redirect('entrar');
     }
+    //modificar
+    //get
+    public function modificarDatos(){
+        return view("modificarUsuario");//('modificarUsuario');
+    }
+    //post
+    public function update(Request $request)
+    {
+        $user = User::where('id', 'like', '%'.Auth::user()->id.'%')->first();        
+        if ($user->email == $request->input('email'))
+        {
+            $this->validate($request, [
+            'name' => 'required|regex:/^[a-zA-Z]+$/u|max:20',
+            'email' => 'required|email',
+            'password' => 'required',
+            ]);
+        }
+        else
+        {
+            $this->validate($request, [
+            'name' => 'required|regex:/^[a-zA-Z]+$/u|max:20',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            ]);
+        }
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        if ($user->password != $request->input('password'))
+            $user->password = bcrypt($request->input('password'));
+        //$user->creditcard = $request->input('creditCard');
+        $user->save();
+        return view("/home");        
+    }
 }

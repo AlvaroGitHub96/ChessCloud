@@ -37,7 +37,7 @@
                     </div>
                     <ul class="nav navbar-nav">
                     <li><span class="navbar-text">Bienvenido {{Auth::User()->name}}</span></li>
-                    <li><a href="#">Perfil</a></li>
+                    <li><a href="/modificarUsuario">Perfil</a></li>
                     <li><a href="/salir">Cerrar Sesión</a></li>
                     </ul>
                 </div>
@@ -56,6 +56,7 @@
                 </div>
             </nav>
             @endif
+
             @yield('content')
         </main>
         <footer class="fixed-bottom">

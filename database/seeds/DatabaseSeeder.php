@@ -23,12 +23,18 @@ class DatabaseSeeder extends Seeder
         //lo siguiente queda a la espera de ver si el js será para jugar o para analizar, 
         //de momento gestión de usuarios
         //4 TITLE
-        //$this->call(TitlesTableSeeder::class);
-        //$this->command->info('Tabla titles rellenada');
+        $this->call(TitlesTableSeeder::class);
+        $this->command->info('Tabla titles rellenada');
         //5 PLAYERS
-        //$this->call(PlayersTableSeeder::class);
-        //$this->command->info('Tabla players rellenada');
-        //6 GAMES
+        $this->call(PlayersTableSeeder::class);
+        $this->command->info('Tabla players rellenada');
+        //6 PLAYER_TITLES
+        $this->call(PlayerTitlesTableSeeder::class);
+        $this->command->info('Tabla playerTitles rellenada');
+        //7 ASSESMENTS -> sería para los movimientos (su valoración)
+        //$this->call(AssesmentsTableSeeder::class);
+        //$this->command->info('Tabla assesments rellenada');
+        //8 GAMES
         //$this->call(GamesTableSeeder::class);
         //$this->command->info('Tabla games rellenada');
     }
