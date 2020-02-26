@@ -13,6 +13,7 @@ class CreatePlayersTitlesTable extends Migration
      */
     public function up()
     {
+        Schema::DropIfExists('player_titles');
         Schema::create('player_titles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('title_id');

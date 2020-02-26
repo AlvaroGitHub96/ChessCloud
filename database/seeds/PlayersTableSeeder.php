@@ -12,38 +12,45 @@ class PlayersTableSeeder extends Seeder
     public function run()
     {
         DB::table('players')->delete();
+        Schema::table('players', function($table){
+            $table->string('name');
+            $table->string('surname');
+            $table->string('country');
+            $table->integer('ranking')->default(0);
+            $table->string('title')->default('');
+            //$table->foreign('title')->references('title')->on('titles')->onDelete('cascade');
+        });
+
         $TAM = 100;        
         for($i = 0;$i < $TAM;$i++){
-            $ids = 0;
             $names = $this->randName();
             $surnames = $this->randSurname();
             $pais = $this->randCountry();
-            $elo = rand(0,2800);
-            $cantidad_titulos = 9;
-            $titulo = rand(0,$cantidad_titulos);
+            $elo = rand(0,1800);
             if($elo<1000){$elo=0;}
             DB::table('players')->insert([
-                'id' => $ids,
                 'name' => $names,
                 'surname' => $surnames,
                 'ranking' => $elo,
                 'country' => $pais,
-                'id_title' =>$titulo,
                 ]);//'colour' => rand(0,1)//colour: 0 white, 1 black
         }
 
     }
     private function randName(){
         $nombres = array('Pablo', 'Manuel', 'Clara', 'David', 'Alvaro', 'Carlos', 'Francisco', 'Javier', 'Aitor', 'Angel', 'Nerea', 'Carmen', 'Alba', 'Eugenio', 'Albert', 'Flanagan');
-        return $nombres;
+        $stringaux = $nombres[rand(0,count($nombres)-1)];
+        return $stringaux;
     }
     private function randSurname(){
         $apellidos = array('Lopez', 'Perez', 'Belmar', 'Navarro', 'Carmona', 'Epifanio', 'Rodes', 'Bolson', 'Tejedor', 'Tevar', 'Garcia', 'Rodriguez', 'Jimenez', 'Galindo');
-        return $apellidos;
+        $stringaux = $apellidos[rand(0,count($apellidos)-1)];
+        return $stringaux;
     }
 
     private function randCountry(){
         $paises = array('España', 'Francia', 'Portugal', 'Reino Unido', 'Alemania', 'Italia', 'USA', 'Rusia', 'China', 'India', 'Grecia', 'Cuba');
-        return $paises;
+        $stringaux = $paises[rand(0,count($paises)-1)];
+        return $stringaux;
     }
 }

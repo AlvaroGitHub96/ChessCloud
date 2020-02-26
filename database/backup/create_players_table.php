@@ -13,6 +13,7 @@ class CreatePlayersTable extends Migration
      */
     public function up()
     {
+        Schema::DropIfExists('players');
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -20,7 +21,6 @@ class CreatePlayersTable extends Migration
             $table->int('ranking');
             $table->string('country');
             $table->int('id_title');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

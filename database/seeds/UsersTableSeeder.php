@@ -12,19 +12,30 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->delete();
-        $passAdmin = bcrypt("a_1234_z");
+        Schema::table('users', function($table){
+            $table->integer('rol_id')->default(0);
+            //$table->foreign('rol_id')->references('id')->on('rol')->onDelete('cascade');
+            $table->string('name');
+            $table->string('email');
+            $table->string('password');
+            $table->boolean('email_verified');
+        });
+        
+        DB::table('users')->delete();
+        $passAdmin = bcrypt("12345678");
         DB::table('users')->insert([
+                'rol_id' => 2,
                 'name' => "serverslayer",
                 'email' => "alvaronavarrolopez@hotmail.com",
                 'password' => $passAdmin,
-                'email_verified' => 1]);
+                'email_verified' => true]);
         for($i = 0;$i < 100;$i++){
             $strings = $this->randString();
             DB::table('users')->insert([
                 'name' => $strings,
                 'email' => $this->randemail($strings,$i),
                 'password' => bcrypt('hola'),
-                'email_verified' => rand(0,1)]);//1 true, 0 false
+                'email_verified' => true]);//1 true, 0 false
         }
 
     }

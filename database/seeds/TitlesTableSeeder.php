@@ -11,23 +11,28 @@ class TitlesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('titles')->delete();
+        Schema::table('titles', function($table){
+            $table->string('title');
+        });
+
         DB::table('titles')->insert([
-            'titles' => '']);//no titulado
+            'title' => '']);//no titulado
         DB::table('titles')->insert([
-            'titles' => 'CM']);
+            'title' => 'CM']);
         DB::table('titles')->insert([
-            'titles' => 'WCM']);
+            'title' => 'WCM']);
         DB::table('titles')->insert([
-            'titles' => 'FM']);
+            'title' => 'FM']);
         DB::table('titles')->insert([
-            'titles' => 'WFM']);
+            'title' => 'WFM']);
         DB::table('titles')->insert([
-            'titles' => 'IM']);
+            'title' => 'IM']);
         DB::table('titles')->insert([
-            'titles' => 'WIM']);
+            'title' => 'WIM']);
         DB::table('titles')->insert([
-            'titles' => 'GM']);
+            'title' => 'GM']);
         DB::table('titles')->insert([
-            'titles' => 'WGM']);
+            'title' => 'WGM']);
     }
 }

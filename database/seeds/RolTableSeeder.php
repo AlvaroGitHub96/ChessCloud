@@ -11,11 +11,17 @@ class RolTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('rol')->delete();
+        
+        Schema::table('rol', function($table){
+            $table->string('rol');
+        });
+
         DB::table('rol')->insert([
             'rol' => 'usuario']);
         DB::table('rol')->insert([
             'rol' => 'editor']);
         DB::table('rol')->insert([
-            'rol' => 'adminustrador']);
+            'rol' => 'administrador']);
     }
 }

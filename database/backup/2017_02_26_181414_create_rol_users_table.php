@@ -13,15 +13,18 @@ class CreateRolUsersTable extends Migration
      */
     public function up()
     {
+        Schema::DropIfExists('rol_users');
         Schema::create('rol_users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('rol_id');
-            $table->foreign('rol_id')->references('id')->on('rol')->onDelete('cascade');
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
-            //$table->primary(array('user_id','rol'));
         });
+
+        /*Schema::table('rol_users', function (Blueprint $table) {
+            $table->foreign('rol_id')->references('id')->on('rol');
+            $table->foreign('user_id')->references('id')->on('users');
+        });*/
     }
 
     /**
