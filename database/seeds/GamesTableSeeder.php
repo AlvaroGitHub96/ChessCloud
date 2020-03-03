@@ -29,9 +29,9 @@ class GamesTableSeeder extends Seeder
             //$table->foreign('id_black')->references('id')->on('players')->onDelete('cascade');
             $table->string('tournament');
             $table->integer('result');
-            $table->string('movements');
+            $table->text('movements');
         });
-
+        
         $cantidad_jugadores = DB::table('players')->count();
         //print_r($cantidad_jugadores);
         $TAM = 50;
@@ -40,7 +40,7 @@ class GamesTableSeeder extends Seeder
         while($id_blancas === $id_negras){
              $id_negras = rand(0,$cantidad_jugadores-1);
         }
-
+        
         //print_r($id_blancas);
         //print_r($id_negras);
         //select
