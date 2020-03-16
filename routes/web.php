@@ -39,3 +39,6 @@ Route::get('/salir', 'UserController@logOut');
 //modificar usuario
 Route::get('/modificarUsuario', 'UserController@modificarDatos')->middleware('auth');
 Route::post('/modificarUsuario', 'UserController@update');
+
+//lista de partidas de la bd
+Route::get('/partidas', 'GameController@verPartidas');

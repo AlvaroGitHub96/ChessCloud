@@ -35,18 +35,15 @@ class GamesTableSeeder extends Seeder
         $cantidad_jugadores = DB::table('players')->count();
         //print_r($cantidad_jugadores);
         $TAM = 50;
-        $id_blancas = rand(0,$cantidad_jugadores-1);
-        $id_negras = rand(0,$cantidad_jugadores-1);
-        while($id_blancas === $id_negras){
-             $id_negras = rand(0,$cantidad_jugadores-1);
-        }
-        
-        //print_r($id_blancas);
-        //print_r($id_negras);
-        //select
-        $jugador_blancas = DB::table('players')->where('id', $id_blancas)->get()->first();
-        $jugador_negras = DB::table('players')->where('id', $id_negras)->get()->first();
         for($i = 0;$i < $TAM;$i++){
+            $id_blancas = rand(0,$cantidad_jugadores-1);
+            $id_negras = rand(0,$cantidad_jugadores-1);
+            while($id_blancas === $id_negras){
+                 $id_negras = rand(0,$cantidad_jugadores-1);
+            }
+
+            $jugador_blancas = DB::table('players')->where('id', $id_blancas)->get()->first();
+            $jugador_negras = DB::table('players')->where('id', $id_negras)->get()->first();
             $torneo_aux = $this->randTournament();
             $partida_aux = $this->jugadasPartida();
             DB::table('games')->insert([

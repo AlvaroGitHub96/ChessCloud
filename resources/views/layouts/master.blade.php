@@ -52,6 +52,7 @@
                     <!--<li class="active"><a href="#">Home</a></li>-->
                     <li><a href="/entrar">Entrar</a></li>
                     <li><a href="/registrar">Registrarse</a></li>
+                    <li><a href="/partidas">Partidas</a></li>
                     </ul>
                 </div>
             </nav>

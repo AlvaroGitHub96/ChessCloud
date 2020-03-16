@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected $table = 'usuario';
+    //protected $table = 'usuario';
     public function devolverFormulario(){return view('/registrar');}
     
     public function username()
