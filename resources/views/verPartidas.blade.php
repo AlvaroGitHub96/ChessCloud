@@ -1,9 +1,8 @@
 @extends('layouts.master')
-@section('title','ChessCloud')
-@section('head')
+@section('content')
+
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
-
 
 <div class="row">
     <div class="col-md-12">
@@ -25,15 +24,16 @@
         </div>
     </div>
 </div>
+
 <h2>Partidas</h2>
  
 <div class="row">
 @foreach ($games as $g)
     <div class="col-md-4 col-lg-3">
         <div class="thumbnail">
-            <a href="/partida/{{$g->id}}" class="enlace btn" data-togle="tooltip" data-placement="bottom" title="{{$g->id}}">
+        <a href="/partida/{{$g->id}}" class="enlace btn" data-togle="tooltip" data-placement="bottom" title="{{$g->id}}">
                 <div class="caption">
-                    <h4 align="center">
+                    <h4>
                         {{$g->movements}}
                     </h4>
                 </div>
@@ -43,8 +43,5 @@
 @endforeach
 </div>
 
-{{-- <!--<ul class="pager">
-    {{ $partidas->links() }}
-</ul>--> --}}
 
 @endsection

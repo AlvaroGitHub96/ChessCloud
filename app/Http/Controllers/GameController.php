@@ -10,6 +10,8 @@ class GameController extends Controller
         
         //muestro las partidas de la bd
         $games = DB::table('games')->get();
+        //$filas = DB::table('games')->count();
+        //print($filas);
 
         //$games= App\Game::all();
 
