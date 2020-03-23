@@ -4,6 +4,8 @@
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
 
+<!-- boton -->
+
 <div class="row">
     <div class="col-md-12">
         <div class="btn-group">
@@ -25,22 +27,29 @@
     </div>
 </div>
 
-<h2>Partidas</h2>
+<h2 align="center">Partidas</h2>
  
-<div class="row">
-@foreach ($games as $g)
-    <div class="col-md-4 col-lg-3">
-        <div class="thumbnail">
-        <a href="/partida/{{$g->id}}" class="enlace btn" data-togle="tooltip" data-placement="bottom" title="{{$g->id}}">
-                <div class="caption">
-                    <h4>
-                        {{$g->movements}}
-                    </h4>
-                </div>
-            </a>
-        </div>
-    </div>
-@endforeach
+<!-- lista de las partidas -->
+
+<div>
+    <ul class="list-group">
+    @foreach ($games as $g)
+        <li class="list-group-item">
+            <img src="images/tablero.jpg" title="{{$g->id}}" alt="{{$g->id}}" />
+            <div class="thumbnail">
+                    <a clas="btn btn-info" href="/partida/{{$g->id}}">
+                        Partida {{$g->id}}
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            {{$g->movements}}
+                        </h4>
+                    </div>
+                    </a>
+             </div>
+        </li>
+    @endforeach
+    </ul>
 </div>
 
 
