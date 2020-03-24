@@ -5,7 +5,7 @@
     <div class="form-group">
         <div class="col-md-10 col-md-offset-2">
             <div class="card">           
-            <div style="background-color: #007bff; border-color: #007bff; color: white;" class="card-heading">Entrar</div>
+            <h1 style="background-color: #007bff; border-color: #007bff; color: white;" class="card-heading">Entrar</h1>
                 <div class="card-body" >
                 <img src="icon/user.jpg" />
                     <form class="form-horizontal" role="form" method="POST" action="{{ action('UserController@iniciado') }}">
