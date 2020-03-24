@@ -1,0 +1,42 @@
+<html>
+<head>
+        <link rel="stylesheet" href="public/css/style.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="shortcut icon" href="{{{ asset('logos/logopng.png') }}}">
+        <title>@yield('title')</title>
+        <!-- 1. skin -->
+        
+        <!--<link rel="stylesheet" href="//releases.flowplayer.org/7.0.2/skin/skin.css">-->
+        <!-- 2. jquery library - required for video tag based installs -->
+        <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+        <!-- 3. flowplayer -->
+        <script src="//releases.flowplayer.org/7.0.2/flowplayer.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+</head>
+
+    <body>
+        <h1>ChessCloud</h1>
+        @if(Auth::check())
+            <li><a href="/salir">Salir</a></li>
+        @else
+        <ul>
+            <li><a href="/entrar">Entrar</a></li>
+            <li><a href="/registrar">Registrarse</a></li>
+        </ul>
+        @endif
+        @yield('content')
+    </body>
+</html>

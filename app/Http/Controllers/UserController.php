@@ -35,6 +35,7 @@ class UserController extends Controller
         $usuario->email = $request->input('email');
         $usuario->name = $request->input('name');
         $usuario->password = $request->input('password');
+        $usuario->email_verified = 1;
         $usuario->save();
         //$usuario = User::create($request(['name', 'email', 'password']));
         

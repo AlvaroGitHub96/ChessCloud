@@ -1,111 +1,50 @@
 @extends('layouts.master')
 @section('title','ChessCloud')
 @section('content')
-<meta charset="UTF-8">
-<!--
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
--->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<div class="container">
-	<div class="row">
+<div class="container-fluid">
 		<!-- Carousel -->
-    	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    	<div id="carousel_home" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-			  	<li data-target="#chess1" data-slide-to="0"></li>
-			    <li data-target="#chess2" data-slide-to="1"></li>
-			    <li data-target="#chess3" data-slide-to="2"></li>
+			  	<li data-target="#carousel_home" data-slide-to="0" class="active"></li>
+			    <li data-target="#carousel_home" data-slide-to="1"></li>
+			    <li data-target="#carousel_home" data-slide-to="2"></li>
 			</ol>
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
-			    <div class="item active">
-			    	<img src="images/chess1.jpg" alt="First slide" class=".slicer">
+                @for($i = 1; $i <= 3; $i ++)
+                <div class="carousel-item @if($i == 1)active @endif">
+                    <img class="img-fluid" src="images/chess{{$i}}.jpg" alt="Slide {{$i}}">
                     <!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            <h2>
-                            	<span>Bienvenido a <strong>ChessCloud</strong></span>
-                            </h2>
-                            <br>
-                            <h3>
-                            	<span>Sitio web diseñado y creado por Serverslayer</span>
-                            </h3>
-                            <br>
-                            <div class="">
-                                @if(Auth::check())
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
-                                @else
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div><!-- /header-text -->
-			    </div>
-			    <div class="item">
-			    	<img src="images/chess2.jpg" alt="Second slide">
-			    	<!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            <h2>
-                            	<span>Bienvenido a <strong>ChessCloud</strong></span>
-                            </h2>
-                            <br>
-                            <h3>
-                            	<span>Sitio web diseñado y creado por Serverslayer</span>
-                            </h3>
-                            <br>
-                            <div class="">
-                                @if(Auth::check())
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
-                                @else
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div><!-- /header-text -->
-			    </div>
-			    <div class="item">
-			    	<img src="images/chess3.jpg" alt="Third slide">
-			    	<!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            <h2>
-                            	<span>Bienvenido a <strong>ChessCloud</strong></span>
-                            </h2>
-                            <br>
-                            <h3>
-                            	<span>Sitio web diseñado y creado por Serverslayer</span>
-                            </h3>
-                            <br>
-                            <div class="">
-                                @if(Auth::check())
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
-                                @else
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrar</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div><!-- /header-text -->
-			    </div>
+                    <div class="carousel-caption">
+                        <h2>
+                            <span>Bienvenido a <strong>ChessCloud</strong></span>
+                        </h2>
+                        <br>
+                        <h3>
+                            <span>Sitio web diseñado y creado por Serverslayer</span>
+                        </h3>
+                        <br>
+                        
+                        @if(Auth::check())
+                            <a class="btn btn-theme btn-sm btn-min-block" href="/home">Home</a>
+                            <a class="btn btn-theme btn-sm btn-min-block" href="/salir">Salir</a>
+                        @else
+                            <a class="btn btn-theme btn-sm btn-min-block" href="/entrar">Entrar</a>
+                            <a class="btn btn-theme btn-sm btn-min-block" href="/registrar">Registrarse</a>
+                        @endif
+                    </div>
+                </div>
+                @endfor
+			    
 			</div>
 			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-		    	<span class="glyphicon glyphicon-chevron-left"></span>
+			<a class="carousel-control-prev" href="#carousel_home" data-slide="prev">
+		    	<span class="carousel-control-prev-icon"></span>
 			</a>
-			<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-		    	<span class="glyphicon glyphicon-chevron-right"></span>
+			<a class="carousel-control-next" href="#carousel_home" data-slide="next">
+		    	<span class="carousel-control-next-icon"></span>
 			</a>
 		</div><!-- /carousel -->
-	</div>
 </div>
-
 @endsection
