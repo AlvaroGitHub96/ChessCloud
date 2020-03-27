@@ -97,7 +97,7 @@ footer a {
 
 /*Navbar styles*/
 nav {
-    background-image: url("https://www.myfreetextures.com/wp-content/uploads/2014/10/seamless-wood-background-1.jpg");
+    background-image: url("/images/seamless-wood-background-1.jpg");
     background-repeat: repeat-x;/* Determine what direction the image will repeat */
 }
 

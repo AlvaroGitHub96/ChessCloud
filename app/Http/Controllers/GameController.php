@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    public function partida($partida){
+        $game = DB::table('games')->where('id', '=', $partida)->first();
+        return view('partida')->with('game',$game);
+    }
+
     public function verPartidas(){
         
         //muestro las partidas de la bd
