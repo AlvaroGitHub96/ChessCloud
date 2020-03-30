@@ -8,7 +8,18 @@ class GameController extends Controller
 {
     public function partida($partida){
         $game = DB::table('games')->where('id', '=', $partida)->first();
-        return view('partida')->with('game',$game);
+        if($game->id==0){
+            $result = "1 - 0";
+        }
+        else{
+            if($game->id==1){
+                $result = "1/2 - 1/2";
+            }
+            else{
+                $result = "0 - 1";
+            }
+        }
+        return view('partida')->with('game',$game)->with('result',$result);
     }
 
     public function verPartidas(){

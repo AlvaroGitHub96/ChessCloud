@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-header" style="background-color: #007bff; border-color: #007bff; color: white;">Partida {{$g->id}}</div>
             <div class="card-body">
-                <h4 class="card-title"> {{$g->surname_white}},{{$g->name_white}} vs {{$g->surname_black}},{{$g->name_black}} in {{$g->tournament}} </h4>            
+                <h4 class="card-title"> {{$g->surname_white}},{{$g->name_white}} vs {{$g->surname_black}},{{$g->name_black}} in {{$g->tournament}}</h4>            
                 <p class="card-text">{{$g->movements}}</p>
                 <a href="/partida/{{$g->id}}" class="btn btn-primary">Ver Partida</a>
             </div>
