@@ -11,6 +11,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <!-- mi css propio -->
         <link href="{{ asset('css/site.css') }}" rel="stylesheet">
+        <!-- libreria de chessboard -->
+        <!-- css -->
+        <link href="{{ asset('css/chessboard-1.0.0.min.css') }}" rel="stylesheet">
+        <!-- js -->
+        <script src="{{ asset('js/chessboard-1.0.0.js') }}"></script>
+        <script src="{{ asset('js/chess.min.js') }}"></script>
     </head>
 
     <body>   
