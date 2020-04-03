@@ -30,6 +30,7 @@ class GamesTableSeeder extends Seeder
             $table->string('tournament');
             $table->integer('result');
             $table->text('movements');
+            $table->text('movements_processed');
         });
         
         $cantidad_jugadores = DB::table('players')->count();
@@ -46,6 +47,7 @@ class GamesTableSeeder extends Seeder
             $jugador_negras = DB::table('players')->where('id', $id_negras)->get()->first();
             $torneo_aux = $this->randTournament();
             $partida_aux = $this->jugadasPartida();
+            $partida_aux_processed = $this->jugadasPartidaProcessed();
             DB::table('games')->insert([
                 'id_white' => $id_blancas,
                 'name_white' => $jugador_blancas->name,
@@ -61,6 +63,7 @@ class GamesTableSeeder extends Seeder
                 'country_black' => $jugador_negras->country,
                 'tournament' => $torneo_aux,
                 'movements' => $partida_aux,
+                'movements_processed' => $partida_aux_processed,
                 'result' => rand(0,2)]);//0 white, 1 draw, 2 black
         }
 
@@ -71,6 +74,13 @@ class GamesTableSeeder extends Seeder
         $torneo = array('Barcelona', 'Beijing', 'Moscow', 'Linares', 'Londres');
         $stringaux = $tipo[rand(0,count($tipo)-1)]." ".$torneo[rand(0,count($torneo)-1)];
         return $stringaux;
+    }
+
+    private function jugadasPartidaProcessed(){
+        $partidas = array('e4 e6,b3 d5,Ab2 dxe4,Cc3 Cd7,Cxe4 Cgf6,Cc3 Ae7,g3 0–0,Ag2 c6,Cge2 Cd5,a4 Cxc3,Cxc3 Cf6,0–0 Cd5,Aa3 Axa3,Txa3 Cxc3,dxc3 De7,Ta1 Td8,De2 Ad7,Tfd1 Ae8,Td4 Df6,Tad1 Txd4,Txd4 Td8,Dd2 Txd4,Dxd4',
+        'c4 e5,Cc3 Cc6,Cf3 d6,d4 Cxd4,Cxd4 exd4,Dxd4 Df6,Dd2 Ae6,b3 Dg6,Ab2 Cf6,Cb5 Ce4,Df4 0–0–0,f3 Cc5,Cxa7+ Rb8,Cb5 Ae7,h4 h6,Ad4 Ad7,0–0–0 Axb5,cxb5 Ce6,Dg4 Dxg4,fxg4 Cxd4,Txd4 Af6,Td5 Tde8,Th3 Te4,g5 Ae5,Tf3 hxg5,hxg5 Th1');
+        
+        return $partidas[rand(0,count($partidas)-1)];
     }
 
     private function jugadasPartida(){

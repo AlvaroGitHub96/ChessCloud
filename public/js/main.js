@@ -1,5 +1,6 @@
 var board; 
-
+var chess = new Chess();
+//chess.move('e4')
 function main(){
     board = Chessboard('myBoard', {
         draggable: false,
@@ -8,7 +9,9 @@ function main(){
         snapSpeed: 100,
         position: 'start'
       })
-    var game = new Chess();
+    
+    //tras hacer el array de tableros, ver iniciar el "game" y con game.pgn ir construyendo la partida
+    //con notaicón en inglés y los evenlistener para saltar a las jugadas
     var jugadas = document.getElementById("movimientos").textContent;
     var tableros = transformaJugadas(jugadas);
     
@@ -69,7 +72,7 @@ h1: "wR"
         20.Tad1 Txd4 21.Txd4 Td8 22.Dd2 Txd4 23.Dxd4"
 */
 
-function obtenerPieza(jugada){
+function obtenerPieza(jugada,turno){
   //e4
   //los if están igualados a la notación es español, para ponerlo en inglés rehacer seeders y migraciones con datos nuevos
   if(jugada.indexOf("C")!=-1){
@@ -118,36 +121,93 @@ function getOrigen(jugada, turno){
   var aux = board.position();
   var posicion = clickShowPositionBtn();
   var pieza = obtenerPieza(jugada,turno);
-  var columna, fila;
+  var columna = "";
+  var fila = "";
   var posibles_columnas = new Array();
   var posibles_filas = new Array();
+  var origen = "";
+  var busco_columnas = true;
+  var aux_columna,aux_fila;
+  jugada.replace('+','');
+  jugada.replace('#','');
+  jugada.replace('x','');
+  if(jugada.length==4){
+    columna= cambiarLetraNumero(jugada[1]);
+    busco_columnas = false;
+  }
+  else{
+    //detección de jaque y mate para sacar desde el final la columna y la fila
+    columna =  cambiarLetraNumero(jugada.substring(jugada.length-1,jugada.length));
+  }
+  //detección de jaque y mate para sacar desde el final la columna y la fila
+  fila = jugada.substring(jugada.length-2,jugada.length-1);
+  
+
   if(pieza == turno + "P"){
     //peon
+    if(jugada.length==3){
+      columna=jugada[1];
+      busco_columnas = false;
+    }
+    else{
+      posibles_columnas.add(columna+1);
+      posibles_columnas.add(columna-1);
+      posibles_columnas.add(columna);
+    }
+
+    if(turno=='w'){
+      posibles_filas.add(fila-1);
+      if(fila==4){
+        posibles_filas.add(2);
+      }
+    }
+    else{
+      posibles_filas.add(fila+1);
+      if(fila==5){
+        posibles_filas.add(7);
+      }
+    }
+
+    if(busco_columnas){
+      for(let columna_aux of posibles_columnas){
+        for(let fila_aux of posibles_filas){
+          if(aux[cambiarNumeroLetra(columna_aux) + fila_aux]==pieza){
+            origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+            break;
+          }
+        }
+        if(origen!=""){
+          break
+        }
+      }
+    }
+    else{
+      for(let fila_aux of posibles_filas){
+        if(aux[columna + fila_aux]==pieza){
+          origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+          break;
+        }
+      }
+    }
   }
   else if(pieza == turno + "N"){
     //Caballo
-    //Cf3
-    if(jugada.indexOf("+") == -1 && jugada.indexOf("#") == -1){
-      columna = jugada.substring(jugada.length-1,jugada.length);
-      fila = cambiarLetraNumero(jugada.substring(jugada.length-2,jugada.length-1));
-    }
-    else{
-      columna = jugada.substring(jugada.length-2,jugada.length-1);
-      fila = cambiarLetraNumero(jugada.substring(jugada.length-3,jugada.length-2));
-    }
     //columnas
-    if(columna < 8){
-      posibles_columnas.add(columna+1);
+    if(busco_columnas){
+      if(columna < 8){
+        posibles_columnas.add(columna+1);
+      }
+      if(columna > 1){
+        posibles_columnas.add(columna-1);
+      }
+      if(columna < 7){
+        posibles_columnas.add(columna+2);
+      }
+      if(columna > 2){
+        posibles_columnas.add(columna-2);
+      }
     }
-    if(columna > 1){
-      posibles_columnas.add(columna-1);
-    }
-    if(columna < 7){
-      posibles_columnas.add(columna+2);
-    }
-    if(columna > 2){
-      posibles_columnas.add(columna-2);
-    }
+    
     //filas
     if(fila < 8){
       posibles_filas.add(fila+1);
@@ -161,43 +221,232 @@ function getOrigen(jugada, turno){
     if(fila > 2){
       posibles_filas.add(fila-2);
     }
-    //g1,g5,e1,e5,h2,h4,d2,d4
-    //hace for o for each
-    if(aux[posibles_columnas[0]+posibles_filas[0]]==pieza){
-      return posibles_columnas[0] + cambiarNumeroLetra(posibles_filas[0]);
+
+    if(busco_columnas){
+      for(let columna_aux of posibles_columnas){
+        for(let fila_aux of posibles_filas){
+          if(aux[cambiarNumeroLetra(columna_aux) + fila_aux]==pieza){
+            origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+            break;
+          }
+        }
+        if(origen!=""){
+          break
+        }
+      }
     }
+    else{
+      for(let fila_aux of posibles_filas){
+        if(aux[columna + fila_aux]==pieza){
+          origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+          break;
+        }
+      }
+    }
+    
   }
   else if(pieza == turno + "B"){
     //Alfil
+    aux_columna = columna;
+    aux_fila = fila; 
+    if(busco_columnas){
+      while(aux_columna<8){
+        posibles_columnas.add(aux_columna+1);
+        aux_columna++;
+      }
+    }
+    while(aux_fila<8){
+      posibles_filas.add(aux_fila+1);
+      aux_fila++;
+    }
+
+    if(busco_columnas){
+      for(let columna_aux of posibles_columnas){
+        for(let fila_aux of posibles_filas){
+          if(aux[cambiarNumeroLetra(columna_aux) + fila_aux]==pieza){
+            origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+            break;
+          }
+        }
+        if(origen!=""){
+          break
+        }
+      }
+    }
+    else{
+      for(let fila_aux of posibles_filas){
+        if(aux[columna + fila_aux]==pieza){
+          origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+          break;
+        }
+      }
+    }
+
   }
   else if(pieza == turno + "R"){
     //Torre
+    aux_columna = columna;
+    aux_fila = fila; 
+    if(busco_columnas){
+      while(aux_columna<8){
+        posibles_columnas.add(aux_columna+1);
+        aux_columna++;
+      }
+    }
+    while(aux_fila<8){
+      posibles_filas.add(aux_fila+1);
+      aux_fila++;
+    }
+
+    if(busco_columnas){
+      for(let columna_aux of posibles_columnas){
+        for(let fila_aux of posibles_filas){
+          if(aux[cambiarNumeroLetra(columna_aux) + fila_aux]==pieza){
+            origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+            break;
+          }
+        }
+        if(origen!=""){
+          break
+        }
+      }
+    }
+    else{
+      for(let fila_aux of posibles_filas){
+        if(aux[columna + fila_aux]==pieza){
+          origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+          break;
+        }
+      }
+    }
   }
   else if(pieza == turno + "Q"){
     //Dama
+    aux_columna = columna;
+    aux_fila = fila; 
+    if(busco_columnas){
+      while(aux_columna<8){
+        posibles_columnas.add(aux_columna+1);
+        aux_columna++;
+      }
+    }
+    while(aux_fila<8){
+      posibles_filas.add(aux_fila+1);
+      aux_fila++;
+    }
+
+    if(busco_columnas){
+      for(let columna_aux of posibles_columnas){
+        for(let fila_aux of posibles_filas){
+          if(aux[cambiarNumeroLetra(columna_aux) + fila_aux]==pieza){
+            origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+            break;
+          }
+        }
+        if(origen!=""){
+          break
+        }
+      }
+    }
+    else{
+      for(let fila_aux of posibles_filas){
+        if(aux[columna + fila_aux]==pieza){
+          origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+          break;
+        }
+      }
+    }
   }
   else{
     //Rey
+    if(busco_columnas){
+      if(columna<8){
+        posibles_columnas.add(columna+1);
+      }
+      if(columna>1){
+        posibles_columnas.add(columna-1);
+      }
+    }
+
+    if(fila<8){
+      posibles_filas.add(fila+1);
+    }
+    if(fila>1){
+      posibles_filas.add(fila-1);
+    }
+
+    if(busco_columnas){
+      for(let columna_aux of posibles_columnas){
+        for(let fila_aux of posibles_filas){
+          if(aux[cambiarNumeroLetra(columna_aux) + fila_aux]==pieza){
+            origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+            break;
+          }
+        }
+        if(origen!=""){
+          break
+        }
+      }
+    }
+    else{
+      for(let fila_aux of posibles_filas){
+        if(aux[columna + fila_aux]==pieza){
+          origen = cambiarNumeroLetra(columna_aux) + fila_aux;
+          break;
+        }
+      }
+    }
+
   }
+
+  return origen;
 }
 
 function transformaJugadas(jugadas){
-  var split = jugadas.split(".");
-  var n = split.length - 1;
+  var array_jugadas = jugadas.split(",");
   var posicion_inicial = board.fen();
   var aux = new Array(posicion_inicial);
-  var jugada;
   var blancas, negras;
-  for(var i = 1; i <= n; i++){
-    jugada = split[i].split(" ");
+  //comprobar enroces según el turno 
+  //para enrocar 2 parametros en move-> board.move('e1-g1','h1-f1')
+  for(let jugada of array_jugadas){
+    var partes = jugada.split(" ");
     //e4
-    blancas = jugada[0];
-    board.move(getOrigen(blancas, "w") + '-' +  blancas);
-    aux.add(board.fen());
+    blancas = partes[0];
+    blancas.replace('R','K');
+    blancas.replace('C','N');
+    blancas.replace('T','R');
+    blancas.replace('A','B');
+    blancas.replace('D','Q');
+    chess.move(blancas);
+    /*if(blancas=="0-0"){
+      board.move('e1-g1','h1-f1');
+    }
+    else if(blancas=="0-0-0"){
+      board.move('e1-c1','a1-d1');
+    }
+    else{
+      board.move(getOrigen(blancas, "w") + '-' +  blancas);
+    }*/
+    aux.push(board.fen());
     //e6
-    negras = jugada[1];
-    board.move(getOrigen(negras, "b") + '-' +  negras);
-    aux.add(board.fen());
+    negras = partes[1];
+    negras.replace('R','K');
+    negras.replace('C','N');
+    negras.replace('T','R');
+    negras.replace('A','B');
+    negras.replace('D','Q');
+    chess.move(negras);
+    /*if(negras=="0-0"){
+      board.move('e8-g8','h8-f8');
+    }
+    else if(negras=="0-0-0"){
+      board.move('e8-c8','a8-d8');
+    }
+    else{
+      board.move(getOrigen(negras, "b") + '-' +  negras);
+    }*/
+    aux.push(board.fen());
   }
   return aux;
 }
