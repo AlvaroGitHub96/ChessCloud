@@ -77,24 +77,24 @@ class GamesTableSeeder extends Seeder
     }
 
     private function jugadasPartidaProcessed(){
-        $partidas = array('e4 e6,b3 d5,Ab2 dxe4,Cc3 Cd7,Cxe4 Cgf6,Cc3 Ae7,g3 0–0,Ag2 c6,Cge2 Cd5,a4 Cxc3,Cxc3 Cf6,0–0 Cd5,Aa3 Axa3,Txa3 Cxc3,dxc3 De7,Ta1 Td8,De2 Ad7,Tfd1 Ae8,Td4 Df6,Tad1 Txd4,Txd4 Td8,Dd2 Txd4,Dxd4',
-        'c4 e5,Cc3 Cc6,Cf3 d6,d4 Cxd4,Cxd4 exd4,Dxd4 Df6,Dd2 Ae6,b3 Dg6,Ab2 Cf6,Cb5 Ce4,Df4 0–0–0,f3 Cc5,Cxa7+ Rb8,Cb5 Ae7,h4 h6,Ad4 Ad7,0–0–0 Axb5,cxb5 Ce6,Dg4 Dxg4,fxg4 Cxd4,Txd4 Af6,Td5 Tde8,Th3 Te4,g5 Ae5,Tf3 hxg5,hxg5 Th1');
+        $partidas = array('e4 e6,b3 d5,Ab2 dxe4,Nc3 Nd7,Nxe4 Ngf6,Nc3 Be7,g3 0–0,Bg2 c6,Nge2 Nd5,a4 Nxc3,Nxc3 Nf6,0–0 Nd5,Ba3 Bxa3,Rxa3 Nxc3,dxc3 Qe7,Ra1 Rd8,Qe2 Bd7,Rfd1 Be8,Rd4 Qf6,Rad1 Rxd4,Txd4 Rd8,Qd2 Rxd4,Qxd4',
+        'c4 e5,Nc3 Nc6,Nf3 d6,d4 Nxd4,Nxd4 exd4,Qxd4 Qf6,Qd2 Be6,b3 Qg6,Bb2 Nf6,Nb5 Ne4,Qf4 0–0–0,f3 Nc5,Nxa7+ Kb8,Nb5 Be7,h4 h6,Bd4 Bd7,0–0–0 Bxb5,cxb5 Ne6,Qg4 Qxg4,fxg4 Nxd4,Rxd4 Bf6,Rd5 Rde8,Rh3 Re4,g5 Be5,Rf3 hxg5,hxg5 Rh1');
         
         return $partidas[rand(0,count($partidas)-1)];
     }
 
     private function jugadasPartida(){
-        $partidas = array('1.e4 e6 2.b3 d5 3.Ab2 dxe4 4.Cc3 Cd7 5.Cxe4 Cgf6 
-        6.Cc3 Ae7 7.g3 0–0 8.Ag2 c6 9.Cge2 Cd5 10.a4 Cxc3
-        11.Cxc3 Cf6 12.0–0 Cd5 13.Aa3 Axa3 14.Txa3 Cxc3 15.dxc3 De7 
-        16.Ta1 Td8 17.De2 Ad7 18.Tfd1 Ae8 19.Td4 Df6 
-        20.Tad1 Txd4 21.Txd4 Td8 22.Dd2 Txd4 23.Dxd4',
-        '1.c4 e5 2.Cc3 Cc6 3.Cf3 d6 4.d4 Cxd4 5.Cxd4 exd4 
-        6.Dxd4 Df6 7.Dd2 Ae6 8.b3 Dg6 9.Ab2 Cf6 10.Cb5 Ce4 
-        11.Df4 0–0–0 12.f3 Cc5 13.Cxa7+ Rb8 14.Cb5 Ae7 15.h4 h6 
-        16.Ad4 Ad7 17.0–0–0 Axb5 18.cxb5 Ce6 19.Dg4 Dxg4 
-        20.fxg4 Cxd4 21.Txd4 Af6 22.Td5 Tde8 23.Th3 Te4 24.g5 Ae5 
-        25.Tf3 hxg5 26.hxg5 Th1');
+        $partidas = array('1.e4 e6 2.b3 d5 3.Bb2 dxe4 4.Nc3 Cd7 5.Nxe4 Ngf6 
+        6.Nc3 Be7 7.g3 0–0 8.Bg2 c6 9.Nge2 Nd5 10.a4 Nxc3
+        11.Nxc3 Nf6 12.0–0 Nd5 13.Ba3 Bxa3 14.Rxa3 Nxc3 15.dxc3 Qe7 
+        16.Ra1 Rd8 17.Qe2 Bd7 18.Rfd1 Be8 19.Rd4 Qf6 
+        20.Rad1 Rxd4 21.Rxd4 Rd8 22.Qd2 Rxd4 23.Qxd4',
+        '1.c4 e5 2.Nc3 Nc6 3.Nf3 d6 4.d4 Nxd4 5.Nxd4 exd4 
+        6.Qxd4 Qf6 7.Qd2 Be6 8.b3 Qg6 9.Bb2 Nf6 10.Nb5 Ne4 
+        11.Qf4 0–0–0 12.f3 Nc5 13.Nxa7+ Kb8 14.Nb5 Be7 15.h4 h6 
+        16.Bd4 Bd7 17.0–0–0 Bxb5 18.cxb5 Ne6 19.Qg4 Qxg4 
+        20.fxg4 Nxd4 21.Rxd4 Bf6 22.Rd5 Rde8 23.Rh3 Re4 24.g5 Be5 
+        25.Rf3 hxg5 26.hxg5 Rh1');
         
         return $partidas[rand(0,count($partidas)-1)];
     }
