@@ -12,6 +12,20 @@ header{
     text-align: center;
 }
 
+.jugada{
+    font-weight: bold;
+}
+
+.jugada:hover {
+    cursor: pointer;
+    color: darkblue;
+}
+
+.invisible {
+    display: none;
+    visibility: hidden;
+}
+
 h1 {
     font-size: 36px;
     font-weight: bold;

@@ -44,7 +44,7 @@
             </nav>
 
             @yield('content')
-        <footer class="fixed-bottom">
+        <footer class="sticky-bottom">
             <a style="color: black;">Álvaro Navarro López-Menchero</a>
         </footer>
     </body>
