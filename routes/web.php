@@ -42,5 +42,7 @@ Route::post('/modificarUsuario', 'UserController@update');
 
 //lista de partidas de la bd
 Route::get('/partidas', 'GameController@verPartidas');
-
+//visualizar una partida
 Route::get('/partida/{partida}', 'GameController@partida');
+//visualizar los datos de un jugador
+Route::get('/jugador/{jugador}', 'PlayerController@jugador');

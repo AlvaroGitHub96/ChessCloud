@@ -1,11 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
+
+
+    public function jugador($jugador){
+        $player = DB::table('players')->where('id', '=', $jugador)->first();
+        $games = DB::table('games')->where('id_white', '=', $jugador)->orWhere('id_black', '=', $jugador)->get();
+        return view('jugador')->with('jugador',$player)->with('games',$games);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

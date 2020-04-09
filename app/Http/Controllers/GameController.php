@@ -8,19 +8,48 @@ class GameController extends Controller
 {
     public function partida($partida){
         $game = DB::table('games')->where('id', '=', $partida)->first();
-        if($game->id==0){
-            $result = "1 - 0";
+
+        $result = $this->obtenerResultado($game->result);
+        $Elo_blancas = $this->obtenerEloBlancas($game->ranking_white);
+        $Elo_negras = $this->obtenerEloNegras($game->ranking_black);
+        
+
+        return view('partida')->with('game',$game)->with('result',$result)->with('Elo_blancas',$Elo_blancas)->with('Elo_negras',$Elo_negras);
+    }
+
+    public function obtenerResultado($r) {
+        if($r==0){
+            return "1 - 0";
         }
         else{
-            if($game->id==1){
-                $result = "1/2 - 1/2";
+            if($r==1){
+                return "1/2 - 1/2";
             }
             else{
-                $result = "0 - 1";
+                //r==2
+                return "0 - 1";
             }
         }
-        return view('partida')->with('game',$game)->with('result',$result);
     }
+
+    public function obtenerEloBlancas($ranking_white){
+        if($ranking_white==0){
+            return "";
+        }
+        else{
+            return $ranking_white;
+        }
+    }
+
+    public function obtenerEloNegras($ranking_black){
+        if($ranking_black==0){
+            return "";
+        }
+        else{
+            return $ranking_black;
+        }
+    }
+
 
     public function verPartidas(){
         

@@ -10,8 +10,13 @@
         <div class="col" id="parte1">
             <div class="card">
                 <div class="card-header" style="background-color: #007bff; border-color: #007bff; color: white;">Partida {{$game->id}}</div>
-                <p class="card-body">{{$game->surname_white}},{{$game->name_white}} vs {{$game->surname_black}},{{$game->name_black}} in {{$game->tournament}}</p>
-                <p class="card-body"> Resultado: {{$result}}</p>
+                <p class="card-body">
+                    <a href="/jugador/{{$game->id_white}}">{{$game->surname_white}},{{$game->name_white}} {{$Elo_blancas}}</a>
+                    <span>vs</span>
+                    <a href="/jugador/{{$game->id_black}}">{{$game->surname_black}},{{$game->name_black}} {{$Elo_negras}}</a>
+                    <span>in {{$game->tournament}}</span>
+                </p>
+                <p class="card-body">Resultado: {{$result}}</p>
                 <p class="card-body" id="movimientos">{{$game->movements}}</p>
                 <p style="visibility: hidden; display: none;" id="movimientos-procesados">{{$game->movements_processed}}</p>
                 <!-- jugadas con los listener -->
