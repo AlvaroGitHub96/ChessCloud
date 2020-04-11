@@ -46,3 +46,10 @@ Route::get('/partidas', 'GameController@verPartidas');
 Route::get('/partida/{partida}', 'GameController@partida');
 //visualizar los datos de un jugador
 Route::get('/jugador/{jugador}', 'PlayerController@jugador');
+
+//filtrarPartidas
+Route::get('/buscar_partidas', 'GameController@buscar');
+
+//añadir partida desde la función del programa
+Route::get('/registrarPartida', 'GameController@devolverFormularioPartida');
+Route::post('/registrarPartida', 'GameController@crearPartida');

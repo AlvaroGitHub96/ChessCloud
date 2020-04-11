@@ -34,10 +34,12 @@
                                 <li class="nav-item"><a class="nav-link" href="/modificarUsuario">Perfil</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/salir">Cerrar Sesión</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
                             @else
                                 <li class="nav-item"><a class="nav-link" href="/entrar">Entrar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrar">Registrarse</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
                             @endif
                         </ul>
                     </div>

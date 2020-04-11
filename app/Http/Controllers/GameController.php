@@ -4,8 +4,67 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+
 class GameController extends Controller
 {
+
+    public function crearPartida(Request $request)
+    {
+        //password es la variable del laravel y pass podría llamarse de cualquier forma pues es el nombre de la columna de la bd
+        /*$this->validate($request, [
+        'email' => 'required',  
+        'name' => 'required',
+        'password' => 'required',
+        ]);*/
+        
+        $game = new Game();
+        $game->name_white = $request->input('nombre_blancas');
+        $game->surname_white = $request->input('apellido_blancas');
+        $game->ranking_white = $request->input('Elo_blancas');
+        $game->name_black = $request->input('nombre_negras');
+        $game->surname_black = $request->input('apellido_negras');
+        $game->ranking_black = $request->input('Elo_negras');
+        //$usuario->email_verified = 1;
+        $usuario->save();
+        //$usuario = User::create($request(['name', 'email', 'password']));
+        
+        //debug($user);
+        return redirect("/verPartidas");
+    }
+
+    public function devolverFormularioPartida(){return view('/registrarPartida');}
+
+    public function buscar(Request $request){
+        $nombre = $request->input('nombre');
+        echo "nombre: ";
+        echo $nombre;
+        $torneo = $request->input('torneo');
+        $ranking = $request->input('ranking');
+        //pendiente el ranking del jugador
+        $games = DB::table('games')->get();
+        //->paginate(6);
+        //para paginar, revisar más arriba
+        if($nombre=="" and $torneo==""){
+            //nada que hacer
+        }
+        else{
+            if($nombre!=""){
+                //añado nombre blancas
+                $games = $games->where('name_white', 'like', '%'.$nombre.'%');
+                //añado apellido blancas
+                $games = $games->Where('surname_white', 'like', '%'.$nombre.'%');
+                //añado nombre negras
+                $games = $games->where('name_black', 'like', '%'.$nombre.'%');
+                //añado apellido negras
+                $games = $games->Where('surname_black', 'like', '%'.$nombre.'%');
+            }
+            if($torneo!=""){
+                $games = $games->where('tournament', 'like', '%'.$torneo.'%');
+            }
+        }
+        return view('verPartidas')->with('games',$games);
+    }
+
     public function partida($partida){
         $game = DB::table('games')->where('id', '=', $partida)->first();
 
