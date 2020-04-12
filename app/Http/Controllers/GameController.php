@@ -36,32 +36,43 @@ class GameController extends Controller
 
     public function buscar(Request $request){
         $nombre = $request->input('nombre');
-        echo "nombre: ";
-        echo $nombre;
         $torneo = $request->input('torneo');
         $ranking = $request->input('ranking');
+        $jugador = $request->input("jugador_buscar");
+        echo "jugador: ";
+        echo $jugador;
         //pendiente el ranking del jugador
-        $games = DB::table('games')->get();
+        $games = DB::table('games');
         //->paginate(6);
-        //para paginar, revisar más arriba
-        if($nombre=="" and $torneo==""){
-            //nada que hacer
+        //para paginar, revisar más arriba  
+        if($nombre!=""){
+            $games = $games->where(function($q) use ($nombre){
+                $q->where('name_white', 'like', '%'.$nombre.'%')
+                ->orWhere('surname_white', 'like', '%'.$nombre.'%')
+                ->orWhere('name_black', 'like', '%'.$nombre.'%')
+                ->orWhere('surname_black', 'like', '%'.$nombre.'%');
+            });
         }
-        else{
-            if($nombre!=""){
-                //añado nombre blancas
-                $games = $games->where('name_white', 'like', '%'.$nombre.'%');
-                //añado apellido blancas
-                $games = $games->Where('surname_white', 'like', '%'.$nombre.'%');
-                //añado nombre negras
-                $games = $games->where('name_black', 'like', '%'.$nombre.'%');
-                //añado apellido negras
-                $games = $games->Where('surname_black', 'like', '%'.$nombre.'%');
+        if($torneo!=""){
+            $games = $games->where('tournament', 'like', '%'.$torneo.'%');
+        }
+        if($ranking!=""){
+            if($jugador=="Jugador blancas"){
+                $games = $games->where('ranking_white', '>=', $ranking);
             }
-            if($torneo!=""){
-                $games = $games->where('tournament', 'like', '%'.$torneo.'%');
+            else if($jugador=="Jugador blancas"){
+                $games = $games->where('ranking_black', '>=', $ranking);
+            }
+            else{
+                //ambos
+                $games = $games->where(function($elo) use ($ranking){
+                    $elo->where('ranking_white', '>=', $ranking)
+                    ->orWhere('ranking_black', '>=', $ranking);
+                });
             }
         }
+        //echo $games->dd();
+        $games = $games->get();
         return view('verPartidas')->with('games',$games);
     }
 
