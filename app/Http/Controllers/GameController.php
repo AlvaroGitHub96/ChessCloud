@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 class GameController extends Controller
 {
 
+    public function practicar(){
+        return view("/practicar");
+    }
     public function crearPartida(Request $request)
     {
         //password es la variable del laravel y pass podría llamarse de cualquier forma pues es el nombre de la columna de la bd
@@ -39,9 +42,6 @@ class GameController extends Controller
         $torneo = $request->input('torneo');
         $ranking = $request->input('ranking');
         $jugador = $request->input("jugador_buscar");
-        echo "jugador: ";
-        echo $jugador;
-        //pendiente el ranking del jugador
         $games = DB::table('games');
         //->paginate(6);
         //para paginar, revisar más arriba  
@@ -125,6 +125,7 @@ class GameController extends Controller
         
         //muestro las partidas de la bd
         $games = DB::table('games')->get();
+        //->simplePaginate(10);
         //$filas = DB::table('games')->count();
         //print($filas);
 

@@ -14,18 +14,18 @@
                         <div class="row">
                             <div class="col">
                                 <div>
-                                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="nombre o apellidos" />
+                                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="nombre o apellidos" value="{{ Request::get('nombre') }}" />
                                 </div>
                                 <br></br>
                                 <div>
-                                    <input id="torneo" name="torneo" type="text" class="form-control" placeholder="torneo" />
+                                    <input id="torneo" name="torneo" type="text" class="form-control" placeholder="torneo" value="{{ Request::get('torneo') }}"/>
                                 </div>
                                 <br></br>
                             </div>
                             <div class="col">
                                 <div>
                                     <div>
-                                        <input id="ranking" name="ranking" type="text" class="form-control" placeholder="ranking" />
+                                        <input id="ranking" name="ranking" type="text" class="form-control" placeholder="ranking" value="{{ Request::get('ranking') }}" />
                                     </div>
                                     <br></br> 
                                     <div>

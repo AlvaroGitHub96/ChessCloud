@@ -53,3 +53,5 @@ Route::get('/buscar_partidas', 'GameController@buscar');
 //añadir partida desde la función del programa
 Route::get('/registrarPartida', 'GameController@devolverFormularioPartida');
 Route::post('/registrarPartida', 'GameController@crearPartida');
+//vs IA
+Route::get('/practicar', 'GameController@practicar');

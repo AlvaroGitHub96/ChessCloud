@@ -1,7 +1,7 @@
 var board,posiciones; 
 var chess = new Chess();
 var pos = 0;
-
+//https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/
 function main(){
   //primero inicio el tablero
   board = Chessboard('myBoard', {

@@ -17,6 +17,7 @@
         <!-- js -->
         <script src="{{ asset('js/chessboard-1.0.0.js') }}"></script>
         <script src="{{ asset('js/chess.min.js') }}"></script>
+        <script src="{{ asset('js/IA.js') }}"></script>
     </head>
 
     <body>   
