@@ -17,7 +17,6 @@
         <!-- js -->
         <script src="{{ asset('js/chessboard-1.0.0.js') }}"></script>
         <script src="{{ asset('js/chess.min.js') }}"></script>
-        <script src="{{ asset('js/IA.js') }}"></script>
     </head>
 
     <body>   
@@ -36,11 +35,13 @@
                                 <li class="nav-item"><a class="nav-link" href="/salir">Cerrar Sesión</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/practicar">Practicar</a></li>
                             @else
                                 <li class="nav-item"><a class="nav-link" href="/entrar">Entrar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrar">Registrarse</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/practicar">Practicar</a></li>
                             @endif
                         </ul>
                     </div>
