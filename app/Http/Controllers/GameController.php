@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use App\Game;
 
 class GameController extends Controller
 {
@@ -13,27 +13,82 @@ class GameController extends Controller
     }
     public function crearPartida(Request $request)
     {
-        //password es la variable del laravel y pass podría llamarse de cualquier forma pues es el nombre de la columna de la bd
-        /*$this->validate($request, [
-        'email' => 'required',  
-        'name' => 'required',
-        'password' => 'required',
-        ]);*/
-        
+        //dd($request->all());
+        if($request->input("resultado")=="blancas"){
+            $result = 0;
+        }
+        else if($request->input("resultado")=="negras"){
+            $result = 2;
+        }
+        else{
+            $result = 1;
+        }
+        if($request->input('titulo_blancas')=="Ninguno"){
+            $titulo_blancas = " "; 
+        }
+        else{
+            $titulo_blancas = $request->input('titulo_blancas');
+        }
+
+        if($request->input('titulo_negras')=="Ninguno"){
+            $titulo_negras = " "; 
+        }
+        else{
+            $titulo_negras = $request->input('titulo_negras');
+        }
+        //consulto si el jugador esta en players
+        //si lo está cojo su id
+        //si no lo está le asigno uno nuevo
+        //Otra opcion: id 9999 para los no registrados y que luego el administrador se encargue
+        //luego lo guardo
+        //AÑADIR IF PARA QUE TENGA MOVIMIENTOS LA PARTIDA
+        $movimientos = $request->input('mov');
+        /*if($movimientos==""){
+            return redirect()->back() ->with('alert', 'No hay jugadas!');
+        }*/
         $game = new Game();
+        ////////
+        $game->id_white = 9999;
+        $game->id_black = 9999;
+        ////////
+
+        $game->title_white = $titulo_blancas;
+        $game->title_black = $titulo_negras;
+        $game->country_white = $request->input('pais_blancas');
+        $game->country_black = $request->input('pais_negras');
         $game->name_white = $request->input('nombre_blancas');
         $game->surname_white = $request->input('apellido_blancas');
         $game->ranking_white = $request->input('Elo_blancas');
         $game->name_black = $request->input('nombre_negras');
         $game->surname_black = $request->input('apellido_negras');
         $game->ranking_black = $request->input('Elo_negras');
-        //$usuario->email_verified = 1;
-        $usuario->save();
+        $game->movements = $movimientos;
+        $game->result = $result;
+        $game->tournament = $request->input("torneo");
+        $game->movements_processed = $this->ConvierteMovimientos($movimientos);
+        //$game->game_verified = 1;
+        $game->save();
+        
         //$usuario = User::create($request(['name', 'email', 'password']));
         
         //debug($user);
-        return redirect("/verPartidas");
+        return redirect("/partidas");
     }
+
+    public function ConvierteMovimientos($movimientos){
+        //1. e4 e6 2. d4 d5
+        //e4 d5,d4 d5
+        $movimientos_array = explode(" ", $movimientos);
+        $tam = sizeOf($movimientos_array);
+        $movimientos_processed = "";
+        for($i = 1; $i<$tam;$i+=3){
+            $first = $movimientos_array[$i++];
+            $second = ($i<$tam-1) ? ($movimientos_array[$i].",") : "";
+            $movimientos_processed .= $first." ".$second;
+        }
+        return $movimientos_processed;
+    }
+
 
     public function devolverFormularioPartida(){return view('/registrarPartida');}
 

@@ -1,66 +1,146 @@
 @extends('layouts.master')
-
 @section('content')
+
+<script src="{{ asset('js/partida.js') }}"></script>
+
 <div class="container">
     <div class="form-group">
-        <div class="col-md-10 col-md-offset-2">
-            <div class="card">
-                <h1 style="background-color: #007bff; border-color: #007bff; color: white;" class="card-heading">Registrar partida</h1>
-                <div class="card-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ action('GameController@crearPartida') }}">
-                        {{ csrf_field() }}
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h1 style="background-color: #007bff; border-color: #007bff; color: white;" class="card-heading">Registrar partida</h1>
+                    <div class="card-body">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('GameController@crearPartida') }}">
+                            {{ csrf_field() }}
 
-                        <div class="row">
-                            <div class="col">
-                                <input id="nombre_blancas" type="text" class="form-control" name="nombre_blancas" placeholder="nombre jugador blancas" required autofocus>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="nombre_blancas" type="text" class="form-control" name="nombre_blancas" placeholder="nombre jugador blancas" required autofocus>
+                                </div>
+                                <div class="col">
+                                    <input id="apellido_blancas" type="text" class="form-control" name="apellido_blancas" placeholder="apellido jugador blancas" required autofocus>
+                                </div>
                             </div>
-                            <div class="col">
-                                <input id="apellido_blancas" type="text" class="form-control" name="apellido_blancas" placeholder="apellido jugador blancas" required autofocus>
+                            <br></br>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="pais_blancas" type="text" class="form-control" name="pais_blancas" placeholder="País jugador blancas" required autofocus>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Título blancas</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-control" name="titulo_blancas" id="titulo_blancas">
+                                                <option value="Ninguno">Ninguno</option>
+                                                <option value="CM">CM</option>
+                                                <option value="WCM">WCM</option>
+                                                <option value="CM">FM</option>
+                                                <option value="WCM">WFM</option>
+                                                <option value="CM">IM</option>
+                                                <option value="WCM">WIM</option>
+                                                <option value="CM">GM</option>
+                                                <option value="WCM">WGM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <br></br>
-                        <div class="row">
-                            <div class="col">
-                                <input id="nombre_negras" type="text" class="form-control" name="nombre_negras" placeholder="nombre jugador negras" required autofocus>
+                            <br></br>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="nombre_negras" type="text" class="form-control" name="nombre_negras" placeholder="nombre jugador negras" required autofocus>
+                                </div>
+                                <div class="col">
+                                    <input id="apellido_negras" type="text" class="form-control" name="apellido_negras" placeholder="apellido jugador negras" required autofocus>
+                                </div>
                             </div>
-                            <div class="col">
-                                <input id="apellido_negras" type="text" class="form-control" name="apellido_negras" placeholder="apellido jugador negras" required autofocus>
+                            <br></br>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="pais_negras" type="text" class="form-control" name="pais_negras" placeholder="País jugador negras" required autofocus>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Título negras</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-control" name="titulo_negras" id="titulo_negras">
+                                                <option value="Ninguno">Ninguno</option>
+                                                <option value="CM">CM</option>
+                                                <option value="WCM">WCM</option>
+                                                <option value="CM">FM</option>
+                                                <option value="WCM">WFM</option>
+                                                <option value="CM">IM</option>
+                                                <option value="WCM">WIM</option>
+                                                <option value="CM">GM</option>
+                                                <option value="WCM">WGM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <br></br>
-                        <div class="row">
-                            <div class="col">
-                                <input id="Elo_blancas" type="text" class="form-control" name="Elo_blancas" placeholder="Elo jugador blancas" required autofocus>
+                            <br></br>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="Elo_blancas" type="text" class="form-control" name="Elo_blancas" placeholder="Elo jugador blancas" required autofocus>
+                                </div>
+                                <div class="col">
+                                    <input id="Elo_negras" type="text" class="form-control" name="Elo_negras" placeholder="Elo jugador negras" required autofocus>
+                                </div>
                             </div>
-                            <div class="col">
-                                <input id="Elo_negras" type="text" class="form-control" name="Elo_negras" placeholder="Elo jugador negras" required autofocus>
+                            <br></br>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="torneo" type="text" class="form-control" name="torneo" placeholder="torneo" required autofocus>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <select class="form-control" name="resultado" id="resultado">
+                                            <option value="blancas">1 - 0</option>
+                                            <option value="tablas">1/2 - 1/2</option>
+                                            <option value="negras">0 - 1</option>
+                                        </select>
+                                    </div>                          
+                                </div>
                             </div>
-                        </div>
-                        <br></br>
-                        <div class="row">
-                            <div class="col">
-                                <input id="torneo" type="text" class="form-control" name="torneo" placeholder="torneo" required autofocus>
-                            </div>
-                            <div class="col">
-                                <div>
-                                    <select class="form-control" name="resultado" id="resultado">
-                                        <option value="blancas">1 - 0</option>
-                                        <option value="tablas">1/2 - 1/2</option>
-                                        <option value="negras">0 - 1</option>
-                                    </select>
-                                </div>                          
-                             </div>
-                        </div>
-                        <br></br>
+                            <br></br>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Movimientos:</label>
+                                </div>
+                                <div id="pgn" class="col">
+                                    <input id="mov" name="mov" type="text" class="form-control" style="height: 40px; width:100%;" required readonly></input>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                            <button id="submit" type="submit" class="btn btn-primary">
                                     Registrar partida
                                 </button>
                             </div>
-                        </div>
-                    </form>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" >Tablero</div>
+                </div>
+                <div class="card-body">
+                    <div id="myBoard"></div>
+                    <button type="button" id="reiniciar" class="btn btn-default" style="background-color: white; margin-top: 5%; width: 100%; border-color: black;">Reiniciar</button>
+                    
+                    <label class="invisible">Status:</label>
+                    <div class="invisible" id="status"></div>
+                    <label class="invisible">FEN:</label>
+                    <div class="invisible" id="fen"></div>
+                    
                 </div>
             </div>
         </div>
