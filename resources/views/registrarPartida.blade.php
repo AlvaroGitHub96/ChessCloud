@@ -134,12 +134,9 @@
                 </div>
                 <div class="card-body">
                     <div id="myBoard"></div>
+                    <button type="button" id="deshacer" class="btn btn-default" style="background-color: white; margin-top: 5%; width: 100%; border-color: black;">Deshacer última jugada</button>
+
                     <button type="button" id="reiniciar" class="btn btn-default" style="background-color: white; margin-top: 5%; width: 100%; border-color: black;">Reiniciar</button>
-                    
-                    <label class="invisible">Status:</label>
-                    <div class="invisible" id="status"></div>
-                    <label class="invisible">FEN:</label>
-                    <div class="invisible" id="fen"></div>
                     
                 </div>
             </div>
