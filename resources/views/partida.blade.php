@@ -12,9 +12,9 @@
                 <div class="card-header" style="background-color: #007bff; border-color: #007bff; color: white;">Partida {{$game->id}}</div>
                 <div class="card-body">
                     <p>
-                        <a href="/jugador/{{$game->id_white}}">{{$game->surname_white}},{{$game->name_white}} {{$Elo_blancas}}</a>
+                        <a href="/jugador/{{$game->id_white}}">{{$game->surname_white}},{{$game->name_white}} </a><a>{{$Elo_blancas}}</a>
                         <span>vs</span>
-                        <a href="/jugador/{{$game->id_black}}">{{$game->surname_black}},{{$game->name_black}} {{$Elo_negras}}</a>
+                        <a href="/jugador/{{$game->id_black}}">{{$game->surname_black}},{{$game->name_black}} </a><a>{{$Elo_negras}}</a>
                         <span>in {{$game->tournament}}</span>
                     </p>
                     <p>Resultado: {{$result}}</p>

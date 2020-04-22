@@ -63,11 +63,19 @@
             <h1>Lista de partidas</h1>
         </div>
     </div>
+
+    <br></br>
+
+    <div>
+        {!! $games->render() !!}
+    </div>
+    
     <br></br>
     @if(!empty($games) && count($games) > 0) 
+        
+        @foreach ($games as $g)
         <div class="row">
-            @foreach ($games as $g)
-            <div class="card">
+            <div class="card" style="width: 100%;">
                 <div class="card-header" style="background-color: #007bff; border-color: #007bff; color: white;">Partida {{$g->id}}</div>
                 <div class="card-body">
                     <h4 class="card-title"> {{$g->surname_white}},{{$g->name_white}} vs {{$g->surname_black}},{{$g->name_black}} in {{$g->tournament}}</h4>            
@@ -75,10 +83,14 @@
                     <a href="/partida/{{$g->id}}" class="btn btn-primary">Ver Partida</a>
                 </div>
             </div>
-            @endforeach
         </div>
+        @endforeach
     @else
         <p>No hay partidas del jugador</p>
     @endif
 </div>
+
+
+
+
 @endsection

@@ -80,7 +80,7 @@ class GamesTableSeeder extends Seeder
 
 
     private function jugadasPartidaProcessed($semilla){
-        $partidas = array('e4 e6,b3 d5,Bb2 dxe4,Nc3 Nd7,Nxe4 Ngf6,Nc3 Be7,g3 0–0,Bg2 c6,Nge2 Nd5,a4 Nxc3,Nxc3 Nf6,0–0 Nd5,Ba3 Bxa3,Rxa3 Nxc3,dxc3 Qe7,Ra1 Rd8,Qe2 Bd7,Rfd1 Be8,Rd4 Qf6,Rad1 Rxd4,Txd4 Rd8,Qd2 Rxd4,Qxd4',
+        $partidas = array('e4 e6,b3 d5,Bb2 dxe4,Nc3 Nd7,Nxe4 Ngf6,Nc3 Be7,g3 0–0,Bg2 c6,Nge2 Nd5,a4 Nxc3,Nxc3 Nf6,0–0 Nd5,Ba3 Bxa3,Rxa3 Nxc3,dxc3 Qe7,Ra1 Rd8,Qe2 Bd7,Rfd1 Be8,Rd4 Qf6,Rad1 Rxd4,Rxd4 Rd8,Qd2 Rxd4,Qxd4',
         'c4 e5,Nc3 Nc6,Nf3 d6,d4 Nxd4,Nxd4 exd4,Qxd4 Qf6,Qd2 Be6,b3 Qg6,Bb2 Nf6,Nb5 Ne4,Qf4 0–0–0,f3 Nc5,Nxa7+ Kb8,Nb5 Be7,h4 h6,Bd4 Bd7,0–0–0 Bxb5,cxb5 Ne6,Qg4 Qxg4,fxg4 Nxd4,Rxd4 Bf6,Rd5 Rde8,Rh3 Re4,g5 Be5,Rf3 hxg5,hxg5 Rh1');
         
         return $partidas[$semilla];

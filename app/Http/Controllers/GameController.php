@@ -72,7 +72,7 @@ class GameController extends Controller
         //$usuario = User::create($request(['name', 'email', 'password']));
         
         //debug($user);
-        return redirect("/partidas");
+        return view("/partidas")->paginate(10);
     }
 
     public function ConvierteMovimientos($movimientos){
@@ -127,7 +127,7 @@ class GameController extends Controller
             }
         }
         //echo $games->dd();
-        $games = $games->get();
+        $games = $games->paginate(10);
         return view('verPartidas')->with('games',$games);
     }
 
@@ -179,13 +179,7 @@ class GameController extends Controller
     public function verPartidas(){
         
         //muestro las partidas de la bd
-        $games = DB::table('games')->get();
-        //->simplePaginate(10);
-        //$filas = DB::table('games')->count();
-        //print($filas);
-
-        //$games= App\Game::all();
-
+        $games = DB::table('games')->paginate(10);
         return view('verPartidas')->with('games',$games);
     }
     /**

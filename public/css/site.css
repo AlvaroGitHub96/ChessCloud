@@ -110,10 +110,17 @@ footer a {
 }
 
 /*Navbar styles*/
+
 nav {
+    background-color: #F6E3DF;
+}
+
+.navbar-light{
     background-image: url("/images/seamless-wood-background-1.jpg");
     background-repeat: repeat-x;/* Determine what direction the image will repeat */
 }
+
+
 
 .navbar-brand{
     padding: 0px;

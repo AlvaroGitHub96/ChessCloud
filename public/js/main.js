@@ -112,7 +112,7 @@ function NextMovement(evento){
     //makeBestMove();
   }
   else{
-    alert("Es la última jugada, no puedes avanzar más")
+    alert("Es la última jugada, no puedes avanzar más.")
   }
 }
 
@@ -123,7 +123,7 @@ function BeforeMovement(evento){
     //makeBestMove();
   }
   else{
-    alert("Es la primera jugada, no puedes retroceder más")
+    alert("Es la primera jugada, no puedes retroceder más.")
   }
 }
 
@@ -178,6 +178,7 @@ var minimaxRoot =function(depth, chess, isMaximisingPlayer) {
 var minimax = function (depth, chess, alpha, beta, isMaximisingPlayer) {
     positionCount++;
     if (depth === 0) {
+        //return 0;
         return -evaluateBoard(chess.board());
     }
 
@@ -361,16 +362,9 @@ var getBestMove = function (chess) {
 
     positionCount = 0;
     //cuando se seleccionaba iba así: var depth = parseInt($('#search-depth').find(':selected').text());
-    var depth = 3;
-    var d = new Date().getTime();
+    var depth = 2;
     var bestMove = minimaxRoot(depth, chess, true);
-    var d2 = new Date().getTime();
-    var moveTime = (d2 - d);
-    var positionsPerS = ( positionCount * 1000 / moveTime);
 
-    $('#position-count').text(positionCount);
-    $('#time').text(moveTime/1000 + 's');
-    $('#positions-per-s').text(positionsPerS);
     return bestMove;
 };
 
