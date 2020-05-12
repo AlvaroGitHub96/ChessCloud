@@ -17,7 +17,7 @@ class TitlesTableSeeder extends Seeder
         });
 
         DB::table('titles')->insert([
-            'title' => ' ']);//no titulado
+            'title' => 'None']);//no titulado
         DB::table('titles')->insert([
             'title' => 'CM']);
         DB::table('titles')->insert([

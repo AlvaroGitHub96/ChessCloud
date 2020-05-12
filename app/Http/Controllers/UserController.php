@@ -41,7 +41,7 @@ class UserController extends Controller
         
         auth()->login($usuario);
         //debug($user);
-        return redirect("/home");
+        return redirect()->back();
     }
 
     public function entrar(Request $request) {
@@ -106,4 +106,60 @@ class UserController extends Controller
         $user->save();
         return view("/home");        
     }
+
+    public function execAdmin(Request $request){
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $pass = $request->input('password');
+        $rol = $request->input('rol');
+        //dd($request);
+        if($request->input('type')=="edit"){
+            $this->updateAdmin($id, $name, $email, $pass, $rol);
+        }
+        return redirect("/home");
+    }
+
+    public function updateAdmin($id, $name, $email, $pass, $rol)
+    {
+        $user = User::where('id', 'like', '%'.$id.'%')->first();        
+        
+        $user->name = $name;
+        $user->email = $email;
+        if ($user->password != $pass)
+            $user->password = bcrypt($pass);
+            $user->rol_id = $rol;
+        $user->save();
+        return redirect("/home");        
+    }
+
+    //admin
+    public function adminView()
+    {
+        $usuarios = User::orderby('id')->paginate(9);
+        return view("admin")->with('usuarios', $usuarios);
+    }
+
+    public function adminUser()
+    {
+        $usuarios = User::orderby('id')->paginate(9);
+        return view('adminUser', array('usuarios' => $usuarios));
+    }
+
+    public function borrar($id)
+    {
+        $user = User::where('id', '=', $id)->first();
+        $user->delete();
+        $usuarios = User::orderby('id')->paginate(9);
+        return redirect("/admin/usuarios")->with('usuarios', $usuarios);
+    }
+
+    /*
+    public function destroy(Request $request)
+    {
+        $user = User::where('id', '=', $request->input('delete'))->first();
+        $user->delete();
+        $usuarios = User::orderby('id')->paginate(9);
+        return view("adminUser")->with('usuarios', $usuarios);
+    }*/
 }

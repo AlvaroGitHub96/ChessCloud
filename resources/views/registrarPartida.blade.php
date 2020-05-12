@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col">
                                             <select class="form-control" name="titulo_blancas" id="titulo_blancas">
-                                                <option value="Ninguno">Ninguno</option>
+                                                <option value="None">None</option>
                                                 <option value="CM">CM</option>
                                                 <option value="WCM">WCM</option>
                                                 <option value="CM">FM</option>
@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="col">
                                             <select class="form-control" name="titulo_negras" id="titulo_negras">
-                                                <option value="Ninguno">Ninguno</option>
+                                                <option value="None">None</option>
                                                 <option value="CM">CM</option>
                                                 <option value="WCM">WCM</option>
                                                 <option value="CM">FM</option>

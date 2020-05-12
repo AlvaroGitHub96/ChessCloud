@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Game;
+use App\Player;
 
 class GameController extends Controller
 {
@@ -14,6 +15,7 @@ class GameController extends Controller
     public function crearPartida(Request $request)
     {
         //dd($request->all());
+        //resultado
         if($request->input("resultado")=="blancas"){
             $result = 0;
         }
@@ -23,37 +25,19 @@ class GameController extends Controller
         else{
             $result = 1;
         }
-        if($request->input('titulo_blancas')=="Ninguno"){
-            $titulo_blancas = " "; 
-        }
-        else{
-            $titulo_blancas = $request->input('titulo_blancas');
-        }
-
-        if($request->input('titulo_negras')=="Ninguno"){
-            $titulo_negras = " "; 
-        }
-        else{
-            $titulo_negras = $request->input('titulo_negras');
-        }
-        //consulto si el jugador esta en players
-        //si lo está cojo su id
-        //si no lo está le asigno uno nuevo
-        //Otra opcion: id 9999 para los no registrados y que luego el administrador se encargue
-        //luego lo guardo
-        //AÑADIR IF PARA QUE TENGA MOVIMIENTOS LA PARTIDA
-        $movimientos = $request->input('mov');
-        /*if($movimientos==""){
-            return redirect()->back() ->with('alert', 'No hay jugadas!');
-        }*/
+        
         $game = new Game();
+        
         ////////
-        $game->id_white = 9999;
-        $game->id_black = 9999;
+        $game->id_white = $this->idJugador($request->input('nombre_blancas'),$request->input('apellido_blancas'),
+        $request->input('pais_blancas'),$request->input('Elo_blancas'),$request->input('titulo_blancas'));
+        
+        $game->id_black = $this->idJugador($request->input('nombre_negras'),$request->input('apellido_negras'),
+        $request->input('pais_negras'),$request->input('Elo_negras'),$request->input('titulo_negras'));
         ////////
-
-        $game->title_white = $titulo_blancas;
-        $game->title_black = $titulo_negras;
+        $movimientos = $request->input('mov');
+        $game->title_white = $request->input('titulo_blancas');
+        $game->title_black = $request->input('titulo_negras');
         $game->country_white = $request->input('pais_blancas');
         $game->country_black = $request->input('pais_negras');
         $game->name_white = $request->input('nombre_blancas');
@@ -62,18 +46,62 @@ class GameController extends Controller
         $game->name_black = $request->input('nombre_negras');
         $game->surname_black = $request->input('apellido_negras');
         $game->ranking_black = $request->input('Elo_negras');
-        $game->movements = $movimientos;
-        $game->result = $result;
         $game->tournament = $request->input("torneo");
+        $game->result = $result;
+        $game->movements = $movimientos;
         $game->movements_processed = $this->ConvierteMovimientos($movimientos);
         //$game->game_verified = 1;
         $game->save();
         
         //$usuario = User::create($request(['name', 'email', 'password']));
-        
+        $games = DB::table('games')->paginate(10);
         //debug($user);
-        return view("/partidas")->paginate(10);
+        return redirect("partidas")->with('games',$games);
     }
+
+    public function crearJugador($nombre,$apellido,$pais,$elo,$titulo){
+        $player = new Player();
+
+        $player->name = $nombre;
+        $player->surname = $apellido;
+        $player->country = $pais;
+        $player->ranking = $elo;
+        $player->title = $titulo;
+
+        $player->save();
+
+        return $player->id;
+    }
+
+    public function idJugador($nombre,$apellido,$pais,$elo,$titulo){
+        $consulta = DB::table('players')
+        ->where('name', '=', $nombre)
+        ->where('surname', '=', $apellido)
+        ->where('country', '=', $pais)
+        ->where('ranking', '=', $elo)
+        ->where('title', '=', $titulo);
+        
+        $players = $consulta->count();
+
+        //dd($players);
+
+        if($players>0){
+            $player = $consulta->first();
+            return $player->id;
+        }
+        else{
+            //$new_id = $this->sumaUno();
+            $new_id = $this->crearJugador($nombre,$apellido,$pais,$elo,$titulo);
+            return $new_id;
+        }
+    }
+
+    /*public function sumaUno(){
+        //$max = Player::find(\DB::table('players')->max('id'));
+        $id_last = DB::table('players')->where('id', \DB::raw("(select max(`id`) from players)"))->first();
+        $id = $id_last->id + 1;
+        return $id;
+    }*/
 
     public function ConvierteMovimientos($movimientos){
         //1. e4 e6 2. d4 d5
@@ -256,5 +284,13 @@ class GameController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    //admin
+    public function adminGame()
+    {
+        $games = Game::orderBy('id')->paginate(9);
+        return view("adminGame")->with('games', $games);
     }
 }
