@@ -17,7 +17,7 @@ class PlayersTableSeeder extends Seeder
             $table->string('surname');
             $table->string('country');
             $table->integer('ranking')->default(0);
-            $table->string('title')->default('');
+            $table->string('title')->default('none');
             //$table->foreign('title')->references('title')->on('titles')->onDelete('cascade');
         });
 

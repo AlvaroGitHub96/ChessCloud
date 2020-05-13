@@ -14,8 +14,8 @@ function edit(lapiz){
 
 
 function insert(add){
-    var form_add = document.getElementById("aux_form");
-    var inputs = form_add.querySelectorAll("input");
+    var tr = add.parentNode.parentNode;
+    var inputs = tr.querySelectorAll("input");
     //email, name, pass
     var form = document.getElementById("form");
     var form_inputs = form.querySelectorAll("input");

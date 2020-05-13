@@ -38,38 +38,52 @@
                         <input value="{{$game->ranking_black}}" style="width: 100%;">
                     </td>
                     <td><input value="{{$game->tournament}}" style="width: 100%;"></td>
-                    <td><input value="{{$game->result}}" style="width: 100%;"></td>
+                    <td>
+                        <select class="form-control" name="resultado">
+                            <option value="0" @if ($game->result == 0) selected @endif>1 - 0</option>
+                            <option value="1" @if ($game->result == 1) selected @endif>1/2 - 1/2</option>
+                            <option value="2" @if ($game->result == 2) selected @endif>0 - 1</option>
+                        </select>
+                    </td>
                     <td><input value="{{$game->movements}}" readonly></input></td>  
                     <td>
-                        <a onclick="edit(this)" id="edit"name="edit" value="{{$game->id}}" class="btn btn-link"> &#x270e; </a>
-                        <a onclick="borrar(this)" id="delete" name="delete" value="{{$game->id}}" type="submit" class="btn btn-danger"> x </a>
+                        <a onclick="edit(this)" id="edit" name="edit" value="{{$game->id}}" class="btn btn-link"> &#x270e; </a>
+                        <a onclick="borrar(this)" id="delete" name="delete" value="{{$game->id}}" class="btn btn-danger"> x </a>
                     </td>
                     
 
             </tr>
         @endforeach
-        <form id="aux_form" class="form-horizontal" role="form" action="{{ action('GameController@execAdmin') }}" method="POST">
-          {{ csrf_field() }}
-            <tr>        
-                    <td></td>
-                    <td>
-                        <input placeholder="name white">
-                        <input placeholder="surname white">
-                        <input placeholder="ranking white" style="width: 100%;">
-                    </td>
-                    <td>
-                        <input placeholder="name black">
-                        <input placeholder="surname black">
-                        <input placeholder="ranking black">
-                    </td>
-                    <td><input placeholder="tournament"></td>
-                    <td><input placeholder="result"></td>
-                    <td><input placeholder="movements" readonly></input></td>  
-                    <td>
-                        <button onclick="insert(this)" id="add" type="submit" class="btn btn-success"> + </button>
-                    </td>
-            </tr>
-        </form>
+
+        <tr>        
+                <td></td>
+                <td>
+                    <input placeholder="name white">
+                    <input placeholder="surname white">
+                    <input placeholder="ranking white" style="width: 100%;">
+                </td>
+                <td>
+                    <input placeholder="name black">
+                    <input placeholder="surname black">
+                    <input placeholder="ranking black">
+                </td>
+                <td><input placeholder="tournament"></td>
+                <td>
+                    <select class="form-control" name="resultado">
+                        <option value="0">1 - 0</option>
+                        <option value="1">1/2 - 1/2</option>
+                        <option value="2">0 - 1</option>
+                    </select>
+                </td>
+                <td>
+                    <input placeholder="movements"></input>
+                    <label>Ejemplo: 1.e4 e5 2.Nf3</label>
+                </td>  
+                <td>
+                    <button onclick="insert(this)" type="submit" id="add" class="btn btn-success"> + </button>
+                </td>
+        </tr>
+
     </tbody>
 </table>
 
@@ -83,8 +97,8 @@
         <input id="surname_black" name="surname_black" type="text"></input>
         <input id="ranking_black" name="ranking_black" type="text"></input>
         <input id="tournament" name="tournament" type="text"></input>
-        <input id="result" name="result" type="text"></input>
         <input id="movements" name="movements" type="text"></input>
+        <input id="result" name="result" type="text"></input>
         <input id="type"  name="type"></input>
         {{ csrf_field() }}
 </form>

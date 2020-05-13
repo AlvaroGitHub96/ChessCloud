@@ -154,7 +154,7 @@ class UserController extends Controller
     public function updateAdmin($id, $name, $email, $pass, $rol)
     {
         $user = User::where('id', 'like', '%'.$id.'%')->first();        
-        
+
         $user->name = $name;
         $user->email = $email;
         if ($user->password != $pass){

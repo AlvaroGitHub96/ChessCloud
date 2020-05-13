@@ -96,6 +96,8 @@ class GameController extends Controller
         }
     }
 
+
+    
     /*public function sumaUno(){
         //$max = Player::find(\DB::table('players')->max('id'));
         $id_last = DB::table('players')->where('id', \DB::raw("(select max(`id`) from players)"))->first();
@@ -286,6 +288,41 @@ class GameController extends Controller
         //
     }
 
+    public function crearJugadorV2($nombre,$apellido,$elo){
+        $player = new Player();
+
+        $player->name = $nombre;
+        $player->surname = $apellido;
+        $player->country = 'INTERNATIONAL';
+        $player->ranking = $elo;
+        $player->title = 'none';
+
+        $player->save();
+
+        return $player->id;
+    }
+
+    public function idJugadorV2($nombre,$apellido,$elo){
+        $consulta = DB::table('players')
+        ->where('name', '=', $nombre)
+        ->where('surname', '=', $apellido)
+        ->where('ranking', '=', $elo);
+        
+        $players = $consulta->count();
+
+        //dd($players);
+
+        if($players>0){
+            $player = $consulta->first();
+            return $player->id;
+        }
+        else{
+            //$new_id = $this->sumaUno();
+            $new_id = $this->crearJugadorV2($nombre,$apellido,$elo);
+            return $new_id;
+        }
+    }
+
     public function execAdmin(Request $request){
         $id = $request->input('id');
 
@@ -308,13 +345,43 @@ class GameController extends Controller
         }
         else{
             if($request->input('type')=="insert"){
-
+                $this->insertAdmin($name_white,$surname_white,$ranking_white,
+                $name_black,$surname_black,$ranking_black,
+                $tournament, $result, $movements);
             }
             else{
                 //borrar - delete;
                 $this->deleteAdmin($id);
             }
         }
+        return redirect()->back();
+    }
+
+    public function insertAdmin($name_white,$surname_white,$ranking_white,
+    $name_black,$surname_black,$ranking_black,
+    $tournament, $result, $movements)
+    {
+        
+        $game = new Game();
+
+        $game->id_white = $this->idJugadorV2($name_white,$surname_white,$ranking_white);
+        
+        $game->id_white = $this->idJugadorV2($name_black,$surname_black,$ranking_black);
+        //FALTA COGER PAIS Y TITLE AQUI Y EN EL BLADE
+        $game->name_white = $name_white;
+        $game->surname_white = $surname_white;
+        $game->ranking_white = $ranking_white;
+
+        $game->name_black = $name_black;
+        $game->surname_black = $surname_black;
+        $game->ranking_black = $ranking_black;
+
+        $game->tournament = $tournament;
+        $game->result = $result;
+        $game->movements = $movements;
+
+        $game->save();
+
         return redirect()->back();
     }
 
