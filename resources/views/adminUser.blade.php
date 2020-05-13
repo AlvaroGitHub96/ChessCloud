@@ -37,7 +37,7 @@
 
             </tr>
         @endforeach
-        <form class="form-horizontal" role="form" action="{{ action('UserController@create') }}" method="POST">
+        <form id="aux_form" class="form-horizontal" role="form" action="{{ action('UserController@create') }}" method="POST">
           {{ csrf_field() }}
             <tr>        
                         <td></td>
@@ -45,7 +45,7 @@
                         <td><input placeholder="Nombre" name="name" required></td>    
                         <td><input placeholder="Password" name="password" required></td>
                         <td><label>0</label></td>                        
-                        <td><button id="add" type="submit" class="btn btn-success"> + </button></td>
+                        <td><button onclick="insert(this)" id="add" type="submit" class="btn btn-success"> + </button></td>
             </tr>
         </form>
     </tbody>

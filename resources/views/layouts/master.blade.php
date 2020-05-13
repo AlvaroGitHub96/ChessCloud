@@ -36,12 +36,14 @@
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/practicar">Practicar</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
                             @else
                                 <li class="nav-item"><a class="nav-link" href="/entrar">Entrar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrar">Registrarse</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/practicar">Practicar</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
                             @endif
                         </ul>
                     </div>

@@ -108,16 +108,44 @@ class UserController extends Controller
     }
 
     public function execAdmin(Request $request){
-        $id = $request->input('id');
+        
         $name = $request->input('name');
         $email = $request->input('email');
         $pass = $request->input('password');
-        $rol = $request->input('rol');
+        
         //dd($request);
         if($request->input('type')=="edit"){
+            $id = $request->input('id');
+            $rol = $request->input('rol');
             $this->updateAdmin($id, $name, $email, $pass, $rol);
         }
-        return redirect("/home");
+        else{
+            if($request->input('type')=="insert"){
+                $this->insertAdmin($name, $email, $pass, $rol);
+            }
+            else{
+                //borrar - delete
+                $id = $request->input('id');
+                //$this->deleteAdmin($id);
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function insertAdmin($name, $email, $pass)
+    {
+        
+        $usuario = new User();
+        $usuario->email = $email;
+        $usuario->name = $name;
+        $usuario->password = $pass;
+        $usuario->email_verified = 1;
+        $usuario->save();
+        //$usuario = User::create($request(['name', 'email', 'password']));
+        
+        auth()->login($usuario);
+        //debug($user);
+        return redirect()->back();
     }
 
     public function updateAdmin($id, $name, $email, $pass, $rol)
@@ -130,7 +158,7 @@ class UserController extends Controller
             $user->password = bcrypt($pass);
             $user->rol_id = $rol;
         $user->save();
-        return redirect("/home");        
+        return redirect()->back();        
     }
 
     //admin
