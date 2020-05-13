@@ -288,9 +288,23 @@ class GameController extends Controller
 
     public function execAdmin(Request $request){
         $id = $request->input('id');
+
+        $name_white = $request->input('name_white');
+        $surname_white = $request->input('surname_white');
+        $ranking_white = $request->input('ranking_white');
+
+        $name_black = $request->input('name_black');
+        $surname_black = $request->input('surname_black');
+        $ranking_black = $request->input('ranking_black');
+
+        $tournament = $request->input('tournament');
+        $result = $request->input('result');
+        $movements = $request->input('movements');
         //dd($request);
         if($request->input('type')=="edit"){ 
-
+            $this->updateAdmin($id, $name_white,$surname_white,$ranking_white,
+            $name_black,$surname_black,$ranking_black,
+            $tournament, $result, $movements);
         }
         else{
             if($request->input('type')=="insert"){
@@ -309,6 +323,29 @@ class GameController extends Controller
         $game->delete();
         $games = Game::orderby('id')->paginate(9);
     }
+
+    public function updateAdmin($id, $name_white,$surname_white,$ranking_white,
+    $name_black,$surname_black,$ranking_black,
+    $tournament, $result, $movements)
+    {
+        $game = Game::where('id', 'like', '%'.$id.'%')->first();        
+        
+        $game->name_white = $name_white;
+        $game->surname_white = $surname_white;
+        $game->ranking_white = $ranking_white;
+
+        $game->name_black = $name_black;
+        $game->surname_black = $surname_black;
+        $game->ranking_black = $ranking_black;
+
+        $game->tournament = $tournament;
+        $game->result = $result;
+        $game->movements = $movements;
+
+        $game->save();
+        return redirect()->back();        
+    }
+
     //admin
     public function adminGame()
     {

@@ -157,9 +157,10 @@ class UserController extends Controller
         
         $user->name = $name;
         $user->email = $email;
-        if ($user->password != $pass)
+        if ($user->password != $pass){
             $user->password = bcrypt($pass);
-            $user->rol_id = $rol;
+        }    
+        $user->rol_id = $rol;
         $user->save();
         return redirect()->back();        
     }
