@@ -287,18 +287,27 @@ class GameController extends Controller
     }
 
     public function execAdmin(Request $request){
-
+        $id = $request->input('id');
         //dd($request);
-        if($request->input('type')=="edit"){           
+        if($request->input('type')=="edit"){ 
+
         }
         else{
             if($request->input('type')=="insert"){
+
             }
             else{
                 //borrar - delete;
+                $this->deleteAdmin($id);
             }
         }
         return redirect()->back();
+    }
+
+    public function deleteAdmin($id){
+        $game = Game::where('id', '=', $id)->first();
+        $game->delete();
+        $games = Game::orderby('id')->paginate(9);
     }
     //admin
     public function adminGame()

@@ -6,6 +6,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Nombre, apelliido y ranking blancas</th>
             <th>Nombre, apellido y ranking negras</th>
             <th>Torneo</th>
@@ -25,7 +26,7 @@
                 }
             </style>
             <tr>
-                                                  
+                    <td><input value="{{$game->id}}" readonly></td>                          
                     <td>
                         <input value="{{$game->name_white}}" style="width: 100%;">
                         <input value="{{$game->surname_white}}" style="width: 100%;">
@@ -50,6 +51,7 @@
         <form id="aux_form" class="form-horizontal" role="form" action="{{ action('GameController@execAdmin') }}" method="POST">
           {{ csrf_field() }}
             <tr>        
+                    <td></td>
                     <td>
                         <input placeholder="name white">
                         <input placeholder="surname white">
@@ -73,6 +75,7 @@
 
 <form id="form" class="form-horizontal invisible" role="form" action="{{ action('GameController@execAdmin') }}" method="POST">
 
+        <input id="id" name="id" type="text"></input>
         <input id="name_white" name="name_white" type="text"></input>
         <input id="surname_white" name="surname_white" type="text"></input>
         <input id="ranking_white" name="ranking_white" type="text"></input>
