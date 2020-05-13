@@ -286,7 +286,20 @@ class GameController extends Controller
         //
     }
 
+    public function execAdmin(Request $request){
 
+        //dd($request);
+        if($request->input('type')=="edit"){           
+        }
+        else{
+            if($request->input('type')=="insert"){
+            }
+            else{
+                //borrar - delete;
+            }
+        }
+        return redirect()->back();
+    }
     //admin
     public function adminGame()
     {

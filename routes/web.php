@@ -65,14 +65,10 @@ Route::get('/admin', 'UserController@adminView');//->middleware('admin');
 //Admin users
 Route::get('/admin/usuarios', 'UserController@adminUser');//->middleware('admin');
 Route::post('/admin/usuarios', 'UserController@execAdmin');
-//Route::get('/admin/usuarios/add', 'UserController@adminAdd')->middleware('admin');
-//Route::get('/admin/usuarios/edit', 'UserController@adminEdit')->middleware('admin');
-//Route::get('/admin/usuarios/borrar', 'UserController@destroy')->middleware('admin');
+
 //Admin games
 Route::get('/admin/partidas', 'GameController@adminGame');//->middleware('admin');
-//Route::get('/admin/partidas/add', 'SerieController@adminAdd')->middleware('admin');
-//Route::get('/admin/partidas/edit', 'SerieController@adminEdit')->middleware('admin');
-//Route::get('/admin/partidas/borrar', 'SerieController@destroySerie')->middleware('admin');
+Route::post('/admin/partidas', 'GameController@execAdmin');
 
 
 //crud

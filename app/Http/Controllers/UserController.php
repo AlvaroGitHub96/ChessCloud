@@ -146,7 +146,7 @@ class UserController extends Controller
         $usuario->save();
         //$usuario = User::create($request(['name', 'email', 'password']));
         
-        auth()->login($usuario);
+        //auth()->login($usuario);
         //debug($user);
         return redirect()->back();
     }

@@ -31,13 +31,13 @@
                     <td><input value="{{$usuario->password}}" name="password{{$usuario->id}}" style="width: 100%;"></td>
                     <td>
                         <input  value="{{$usuario->rol_id}}" name="rol{{$usuario->id}}">
-                        <a onclick="edit(this)" id="edit" href="#" name="edit" value="{{$usuario->id}}" class="btn btn-link"> &#x270e; </a>
+                        <a onclick="edit(this)" id="edit" name="edit" value="{{$usuario->id}}" class="btn btn-link"> &#x270e; </a>
                     </td>
-                    <td><a onclick="borrar(this)" id="delete" href="#" name="delete" value="{{$usuario->id}}" type="submit" class="btn btn-danger"> x </a></td>
+                    <td><a onclick="borrar(this)" id="delete" name="delete" value="{{$usuario->id}}" type="submit" class="btn btn-danger"> x </a></td>
 
             </tr>
         @endforeach
-        <form id="aux_form" class="form-horizontal" role="form" action="{{ action('UserController@create') }}" method="POST">
+        <form id="aux_form" class="form-horizontal" role="form" action="{{ action('UserController@execAdmin') }}" method="POST">
           {{ csrf_field() }}
             <tr>        
                         <td></td>
@@ -53,7 +53,6 @@
 
 <form id="form" class="form-horizontal invisible" role="form" action="{{ action('UserController@execAdmin') }}" method="POST">
 
-        <button id="send"></button>
         <input id="id" name="id" type="text"></input>
         <input id="email" name="email" type="text"></input>
         <input id="name" name="name" type="text"></input>
