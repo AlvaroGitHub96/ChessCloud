@@ -33,7 +33,7 @@
                         <input  value="{{$usuario->rol_id}}" name="rol{{$usuario->id}}">
                         <a onclick="edit(this)" id="edit" href="#" name="edit" value="{{$usuario->id}}" class="btn btn-link"> &#x270e; </a>
                     </td>
-                    <td><a id="delete" href="#" name="delete" value="{{$usuario->id}}" type="submit" class="btn btn-danger"> x </a></td>
+                    <td><a onclick="borrar(this)" id="delete" href="#" name="delete" value="{{$usuario->id}}" type="submit" class="btn btn-danger"> x </a></td>
 
             </tr>
         @endforeach

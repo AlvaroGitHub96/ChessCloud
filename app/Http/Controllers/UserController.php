@@ -108,15 +108,13 @@ class UserController extends Controller
     }
 
     public function execAdmin(Request $request){
-        
+        $id = $request->input('id');
         $name = $request->input('name');
         $email = $request->input('email');
         $pass = $request->input('password');
-        
+        $rol = $request->input('rol');
         //dd($request);
-        if($request->input('type')=="edit"){
-            $id = $request->input('id');
-            $rol = $request->input('rol');
+        if($request->input('type')=="edit"){           
             $this->updateAdmin($id, $name, $email, $pass, $rol);
         }
         else{
@@ -124,12 +122,17 @@ class UserController extends Controller
                 $this->insertAdmin($name, $email, $pass, $rol);
             }
             else{
-                //borrar - delete
-                $id = $request->input('id');
-                //$this->deleteAdmin($id);
+                //borrar - delete;
+                $this->deleteAdmin($id);
             }
         }
         return redirect()->back();
+    }
+
+    public function deleteAdmin($id){
+        $user = User::where('id', '=', $id)->first();
+        $user->delete();
+        $usuarios = User::orderby('id')->paginate(9);
     }
 
     public function insertAdmin($name, $email, $pass)
@@ -174,13 +177,13 @@ class UserController extends Controller
         return view('adminUser', array('usuarios' => $usuarios));
     }
 
-    public function borrar($id)
+    /*public function borrar($id)
     {
         $user = User::where('id', '=', $id)->first();
         $user->delete();
         $usuarios = User::orderby('id')->paginate(9);
         return redirect("/admin/usuarios")->with('usuarios', $usuarios);
-    }
+    }*/
 
     /*
     public function destroy(Request $request)

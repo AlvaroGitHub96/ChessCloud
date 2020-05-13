@@ -1,15 +1,3 @@
-function inicializarVariables(){
-    var edit = document.getElementById("edit").textContent;
-
-
-    var del = document.getElementById("delete").textContent;
-
-
-    var add = document.getElementById("add").textContent;
-
-
-}
-
 function edit(lapiz){
     var tr = lapiz.parentNode.parentNode;
     var inputs = tr.querySelectorAll("input");
@@ -20,7 +8,7 @@ function edit(lapiz){
         form_inputs[i].value = inputs[i].value;
     }
     var type = document.getElementById("type");
-    type.value = "edit"
+    type.value = "edit";
     form.submit();
 }
 
@@ -39,5 +27,20 @@ function insert(add){
     }
     var type = document.getElementById("type");
     type.value = "insert";
+    form.submit();
+}
+
+function borrar(x){
+    var tr = x.parentNode.parentNode;
+    var inputs = tr.querySelectorAll("input");
+    //id, email, name, pass, rol
+    var form = document.getElementById("form");
+    var form_inputs = form.querySelectorAll("input");
+    //no importa nada más a que asigne bien el id, es el atributo que usaremos para borrar
+    for(var i = 0; i < inputs.length; i++){
+        form_inputs[i].value = inputs[i].value;
+    }
+    var type = document.getElementById("type");
+    type.value = "delete";
     form.submit();
 }
