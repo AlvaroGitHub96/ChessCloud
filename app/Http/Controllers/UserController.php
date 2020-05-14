@@ -135,13 +135,14 @@ class UserController extends Controller
         $usuarios = User::orderby('id')->paginate(9);
     }
 
-    public function insertAdmin($name, $email, $pass)
+    public function insertAdmin($name, $email, $pass,$rol)
     {
         
         $usuario = new User();
         $usuario->email = $email;
         $usuario->name = $name;
         $usuario->password = $pass;
+        $usuario->rol_id = $rol;
         $usuario->email_verified = 1;
         $usuario->save();
         //$usuario = User::create($request(['name', 'email', 'password']));

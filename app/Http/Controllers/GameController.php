@@ -287,7 +287,7 @@ class GameController extends Controller
     {
         //
     }
-
+    /*
     public function crearJugadorV2($nombre,$apellido,$elo){
         $player = new Player();
 
@@ -321,7 +321,7 @@ class GameController extends Controller
             $new_id = $this->crearJugadorV2($nombre,$apellido,$elo);
             return $new_id;
         }
-    }
+    }*/
 
     public function execAdmin(Request $request){
         $id = $request->input('id');
@@ -329,24 +329,28 @@ class GameController extends Controller
         $name_white = $request->input('name_white');
         $surname_white = $request->input('surname_white');
         $ranking_white = $request->input('ranking_white');
+        $country_white = $request->input('country_white');
+        $title_white = $request->input('title_white');
 
         $name_black = $request->input('name_black');
         $surname_black = $request->input('surname_black');
         $ranking_black = $request->input('ranking_black');
+        $country_black = $request->input('country_black');
+        $title_black = $request->input('title_black');
 
         $tournament = $request->input('tournament');
         $result = $request->input('result');
         $movements = $request->input('movements');
         //dd($request);
         if($request->input('type')=="edit"){ 
-            $this->updateAdmin($id, $name_white,$surname_white,$ranking_white,
-            $name_black,$surname_black,$ranking_black,
+            $this->updateAdmin($id, $name_white,$surname_white,$ranking_white,$country_white,$title_white,
+            $name_black,$surname_black,$ranking_black,$country_black,$title_black,
             $tournament, $result, $movements);
         }
         else{
             if($request->input('type')=="insert"){
-                $this->insertAdmin($name_white,$surname_white,$ranking_white,
-                $name_black,$surname_black,$ranking_black,
+                $this->insertAdmin($name_white,$surname_white,$ranking_white,$country_white,$title_white,
+                $name_black,$surname_black,$ranking_black,$country_black,$title_black,
                 $tournament, $result, $movements);
             }
             else{
@@ -357,28 +361,33 @@ class GameController extends Controller
         return redirect()->back();
     }
 
-    public function insertAdmin($name_white,$surname_white,$ranking_white,
-    $name_black,$surname_black,$ranking_black,
+    public function insertAdmin($name_white,$surname_white,$ranking_white,$country_white,$title_white,
+    $name_black,$surname_black,$ranking_black,$country_black,$title_black,
     $tournament, $result, $movements)
     {
         
         $game = new Game();
 
-        $game->id_white = $this->idJugadorV2($name_white,$surname_white,$ranking_white);
+        $game->id_white = $this->idJugador($name_white,$surname_white,$country_white,$ranking_white,$title_white);
         
-        $game->id_white = $this->idJugadorV2($name_black,$surname_black,$ranking_black);
-        //FALTA COGER PAIS Y TITLE AQUI Y EN EL BLADE
+        $game->id_black = $this->idJugador($name_black,$surname_black,$country_black,$ranking_black,$title_black);
+
         $game->name_white = $name_white;
         $game->surname_white = $surname_white;
         $game->ranking_white = $ranking_white;
+        $game->country_white = $country_white;
+        $game->title_white = $title_white;
 
         $game->name_black = $name_black;
         $game->surname_black = $surname_black;
         $game->ranking_black = $ranking_black;
+        $game->country_black = $country_black;
+        $game->title_black = $title_black;
 
         $game->tournament = $tournament;
         $game->result = $result;
         $game->movements = $movements;
+        $game->movements_processed = $this->ConvierteMovimientos($movements);
 
         $game->save();
 
@@ -391,8 +400,8 @@ class GameController extends Controller
         $games = Game::orderby('id')->paginate(9);
     }
 
-    public function updateAdmin($id, $name_white,$surname_white,$ranking_white,
-    $name_black,$surname_black,$ranking_black,
+    public function updateAdmin($id, $name_white,$surname_white,$ranking_white,$country_white,$title_white,
+    $name_black,$surname_black,$ranking_black,$country_black,$title_black,
     $tournament, $result, $movements)
     {
         $game = Game::where('id', 'like', '%'.$id.'%')->first();        
@@ -400,10 +409,14 @@ class GameController extends Controller
         $game->name_white = $name_white;
         $game->surname_white = $surname_white;
         $game->ranking_white = $ranking_white;
+        $game->country_white = $country_white;
+        $game->title_white = $title_white;
 
         $game->name_black = $name_black;
         $game->surname_black = $surname_black;
         $game->ranking_black = $ranking_black;
+        $game->country_black = $country_black;
+        $game->title_black = $title_black;
 
         $game->tournament = $tournament;
         $game->result = $result;

@@ -7,6 +7,9 @@ function edit(lapiz){
     for(var i = 0; i < inputs.length; i++){
         form_inputs[i].value = inputs[i].value;
     }
+    var select = tr.querySelector("select");
+    var rol = document.getElementById("rol");
+    rol.value = select.value;
     var type = document.getElementById("type");
     type.value = "edit";
     form.submit();
@@ -25,6 +28,9 @@ function insert(add){
         j = i + 1;
         form_inputs[j].value = inputs[i].value;
     }
+    var select = tr.querySelector("select");
+    var rol = document.getElementById("rol");
+    rol.value = select.value;
     var type = document.getElementById("type");
     type.value = "insert";
     form.submit();
