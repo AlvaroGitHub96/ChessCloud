@@ -25,6 +25,10 @@ function insert(add){
     //saltamos el 0 porque no necesitamos el id
     var j = 0;
     for(var i = 0; i < inputs.length; i++){
+        if(inputs[i].value==""){
+            alert("Faltan campos por rellenar");
+            return;
+        }
         j = i + 1;
         form_inputs[j].value = inputs[i].value;
     }

@@ -21,6 +21,11 @@ function edit(lapiz){
 
 
 function insert(add){
+    var movs = document.getElementById("movimientos");
+    if(noIsJugada(movs)==false){
+        alert("El formato de las jugadas no es correcto, mire el ejemplo!");
+        return;
+    }
     var tr = add.parentNode.parentNode;
     var inputs = tr.querySelectorAll("input");
     var selects = tr.querySelectorAll("select");
@@ -37,6 +42,10 @@ function insert(add){
     var j = 0;
     var ok = true;
     for(var i = 0; i < inputs.length && ok; i++){
+        if(inputs[i].value==""){
+            alert("Faltan campos por rellenar");
+            return;
+        }
         j = i + 1;
         if(i==7){
             var ultimo = true;
@@ -82,8 +91,75 @@ function borrar(x){
 }
 
 
-//funcion
+//aux
+/*
+function noIsGame(movs){
+    var jugadas = movs.value;
+    var numJugada = 1;
+    for(var i = 0; i<jugadas.length; i++){
+        var c = jugadas[i];
+        if(c=="."){
+            //suponemos menos de 100 jugadas
+            if(numJugada<10){
+                if(i>0){
+                    var anterior = jugadas[i-1];
+                    if(anterior!=numJugada){
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if(i>1){
+                    var stringJugada = jugadas[i-2] + jugadas[i-1];
+                    if(stringJugada != numJugada){
+                        return false
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            numJugada++;
+        }
+    }
+    return true;
+}*/
+
+function noIsJugada(movs){
+	var jugadas = movs.value;
+	var numJugada = 1;
+	var digitosJugada = 1;
+
+	for(var i = 1; i < jugadas.length; i++){
+		//Find a dot
+		if (jugadas[i] == '.'){
+			var num = "";
+			//Get num
+			for(var j = i-digitosJugada; j<i; j++){
+				num += jugadas[j];
+			}
+			//Check if prev elem = numJugada
+			if (num == numJugada){
+				numJugada += 1;
+				//Update digitosJugada if necessary
+				if(Math.pow(10,digitosJugada) <= num){
+					digitosJugada +=1;
+				}
+			}else{return false;}
+			//Check if next is not a space
+			if (jugadas[i+1] == ' ') {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 function isGame(movements){
     var chess = new Chess();
     return chess.load_pgn(movements);
 }
+

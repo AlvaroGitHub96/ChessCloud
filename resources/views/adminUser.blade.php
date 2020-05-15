@@ -25,7 +25,7 @@
                 }
             </style>
             <tr>
-                    <td><input value="{{$usuario->id}}" readonly></input></td>                                
+                    <td><input value="{{$usuario->id}}" style="width: 25px;" readonly></input></td>                                
                     <td><input value="{{$usuario->email}}" name="email{{$usuario->id}}" style="width: 100%;"></td>
                     <td><input value="{{$usuario->name}}" name="name{{$usuario->id}}" style="width: 100%;"></td>
                     <td><input value="{{$usuario->password}}" name="password{{$usuario->id}}" readonly style="width: 100%;"></td>
@@ -35,8 +35,8 @@
                             <option value="1" @if ($usuario->rol_id == 1) selected @endif>Editor</option>
                             <option value="2" @if ($usuario->rol_id == 0) selected @endif>Administrador</option>
                         </select>
-                        <a onclick="edit(this)" id="edit" name="edit" value="{{$usuario->id}}" class="btn btn-link"> &#x270e; </a>
                     </td>
+                    <td><a onclick="edit(this)" id="edit" name="edit" value="{{$usuario->id}}" class="btn btn-link"> &#x270e; </a></td>
                     <td><a onclick="borrar(this)" id="delete" name="delete" value="{{$usuario->id}}" class="btn btn-danger"> x </a></td>
 
             </tr>

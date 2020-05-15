@@ -15,7 +15,7 @@ class PlayersTableSeeder extends Seeder
         Schema::table('players', function($table){
             $table->string('name');
             $table->string('surname');
-            $table->string('country');
+            $table->string('country')->default('International');
             $table->integer('ranking')->default(0);
             $table->string('title')->default('none');
             //$table->foreign('title')->references('title')->on('titles')->onDelete('cascade');

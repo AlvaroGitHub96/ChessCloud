@@ -120,7 +120,9 @@ class GameController extends Controller
     }
 
 
-    public function devolverFormularioPartida(){return view('/registrarPartida');}
+    public function devolverFormularioPartida(){
+        return view('/registrarPartida');
+    }
 
     public function buscar(Request $request){
         $nombre = $request->input('nombre');
@@ -323,6 +325,27 @@ class GameController extends Controller
         }
     }*/
 
+    public function ConvierteMovimientosV2($movimientos){
+        //1.e4 e6 2.d4 d5
+        //e4 d5,d4 d5
+        $movimientos_array = explode(".", $movimientos);
+        //Ahora tengo: [1,e4 e5 2, d4 d5]
+        $tam = sizeOf($movimientos_array);
+        $movimientos_processed = "";
+        for($i = 1; $i<$tam;$i++){
+            $aux_string = $movimientos_array[$i];
+            $aux_array = explode(" ", $aux_string);
+            $aux_tam = sizeOf($aux_array);
+            for($j=0;$j<$aux_tam;$j+=2){
+                $first = $aux_array[$j++];
+                $second = ($j<$aux_tam-1) ? ($aux_array[$j].",") : "";
+                $movimientos_processed .= $first." ".$second;
+            }
+            
+        }
+        return $movimientos_processed;
+    }
+
     public function execAdmin(Request $request){
         $id = $request->input('id');
 
@@ -387,7 +410,8 @@ class GameController extends Controller
         $game->tournament = $tournament;
         $game->result = $result;
         $game->movements = $movements;
-        $game->movements_processed = $this->ConvierteMovimientos($movements);
+
+        $game->movements_processed = $this->ConvierteMovimientosV2($movements);
 
         $game->save();
 

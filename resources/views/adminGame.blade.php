@@ -27,7 +27,7 @@
                 }
             </style>
             <tr>
-                    <td><input value="{{$game->id}}" readonly></td>                          
+                    <td><input value="{{$game->id}}" style="width: 25px;" readonly></td>                          
                     <td>
                         <input value="{{$game->name_white}}" style="width: 100%;">
                         <input value="{{$game->surname_white}}" style="width: 100%;">
@@ -133,7 +133,7 @@
                     </select>
                 </td>
                 <td>
-                    <input placeholder="movimientos" required></input>
+                    <input id="movimientos" placeholder="movimientos" required></input>
                     <label>Ejemplo: 1.e4 e5 2.Nf3</label>
                 </td>  
                 <td>

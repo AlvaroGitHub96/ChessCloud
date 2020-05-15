@@ -61,7 +61,7 @@ Route::get('/practicar', 'GameController@practicar');
 
 //vistas de administrador
 //Devolver vista administrador
-Route::get('/admin', 'UserController@adminView');//->middleware('admin');
+//Route::get('/admin', 'UserController@adminView');//->middleware('admin');
 //Admin users
 Route::get('/admin/usuarios', 'UserController@adminUser');//->middleware('admin');
 Route::post('/admin/usuarios', 'UserController@execAdmin');
