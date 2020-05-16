@@ -44,7 +44,7 @@
 
         <tr>        
                     <td></td>
-                    <td><input placeholder="Nombre" name="email" required></td>
+                    <td><input placeholder="Nombre" name="email" id="correo_electronico" required></td>
                     <td><input placeholder="Apellido" name="name" required></td>    
                     <td><input placeholder="Contraseña" name="password" required></td>
                     <td>

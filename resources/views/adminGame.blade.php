@@ -39,10 +39,10 @@
                             <option value="None">None</option>
                             <option value="CM" @if ($game->title_white == 'CM') selected @endif>CM</option>
                             <option value="WCM" @if ($game->title_white == 'WCM') selected @endif>WCM</option>
-                            <option value="CM" @if ($game->title_white == 'FM') selected @endif>FM</option>
-                            <option value="WCM" @if ($game->title_white == 'WFM') selected @endif>WFM</option>
-                            <option value="CM" @if ($game->title_white == 'IM') selected @endif>IM</option>
-                            <option value="WCM" @if ($game->title_white == 'WIM') selected @endif>WIM</option>
+                            <option value="FM" @if ($game->title_white == 'FM') selected @endif>FM</option>
+                            <option value="WFM" @if ($game->title_white == 'WFM') selected @endif>WFM</option>
+                            <option value="IM" @if ($game->title_white == 'IM') selected @endif>IM</option>
+                            <option value="WIM" @if ($game->title_white == 'WIM') selected @endif>WIM</option>
                             <option value="GM" @if ($game->title_white == 'GM') selected @endif>GM</option>
                             <option value="WGM" @if ($game->title_white == 'WGM') selected @endif>WGM</option>
                         </select>
@@ -58,10 +58,10 @@
                             <option value="None">None</option>
                             <option value="CM" @if ($game->title_black == 'CM') selected @endif>CM</option>
                             <option value="WCM" @if ($game->title_black == 'WCM') selected @endif>WCM</option>
-                            <option value="CM" @if ($game->title_black == 'FM') selected @endif>FM</option>
-                            <option value="WCM" @if ($game->title_black == 'WFM') selected @endif>WFM</option>
-                            <option value="CM" @if ($game->title_black == 'IM') selected @endif>IM</option>
-                            <option value="WCM" @if ($game->title_black == 'WIM') selected @endif>WIM</option>
+                            <option value="FM" @if ($game->title_black == 'FM') selected @endif>FM</option>
+                            <option value="WFM" @if ($game->title_black == 'WFM') selected @endif>WFM</option>
+                            <option value="IM" @if ($game->title_black == 'IM') selected @endif>IM</option>
+                            <option value="WIM" @if ($game->title_black == 'WIM') selected @endif>WIM</option>
                             <option value="GM" @if ($game->title_black == 'GM') selected @endif>GM</option>
                             <option value="WGM" @if ($game->title_black == 'WGM') selected @endif>WGM</option>
                         </select>
@@ -97,10 +97,10 @@
                         <option value="None">None</option>
                         <option value="CM">CM</option>
                         <option value="WCM">WCM</option>
-                        <option value="CM">FM</option>
-                        <option value="WCM">WFM</option>
-                        <option value="CM">IM</option>
-                        <option value="WCM">WIM</option>
+                        <option value="FM">FM</option>
+                        <option value="WFM">WFM</option>
+                        <option value="IM">IM</option>
+                        <option value="WIM">WIM</option>
                         <option value="GM">GM</option>
                         <option value="WGM">WGM</option>
                     </select>
@@ -116,10 +116,10 @@
                         <option value="None">None</option>
                         <option value="CM">CM</option>
                         <option value="WCM">WCM</option>
-                        <option value="CM">FM</option>
-                        <option value="WCM">WFM</option>
-                        <option value="CM">IM</option>
-                        <option value="WCM">WIM</option>
+                        <option value="FM">FM</option>
+                        <option value="WFM">WFM</option>
+                        <option value="IM">IM</option>
+                        <option value="WIM">WIM</option>
                         <option value="GM">GM</option>
                         <option value="WGM">WGM</option>
                     </select>

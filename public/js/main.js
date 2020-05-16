@@ -5,11 +5,13 @@ var board,posiciones;
 function main(){
   //primero inicio el tablero
   board = Chessboard('myBoard', {
-      draggable: false,
+      draggable: true,
       moveSpeed: 'slow',
       snapbackSpeed: 500,
       snapSpeed: 100,
       onChange: makeBestMove,
+      onDrop: onDrop,
+      dropOffBoard: 'trash',
       position: 'start'
     })
   //ahora creo el array de posiciones para navegar de una a otra
@@ -30,13 +32,42 @@ function main(){
   //before
   let before = document.getElementById("before");
   before.addEventListener("click",BeforeMovement, false);
+  //volver
+  let volver = document.getElementById("volver");
+  volver.addEventListener("click",volverPos, false);
   //makeBestMove();
   let check = document.getElementById("IA");
   check.value="off";
   let span = document.getElementById("span");
   span.addEventListener("click",ActivarCheck, false);
-  
+  chess = new Chess();
 }
+
+
+var onDrop = function (source, target) {
+
+    var move = chess.move({
+        from: source,
+        to: target,
+        promotion: 'q'
+    });
+    board.position(chess.fen());//.split(" ")[0]);
+    //board.position(chess.fen());
+
+    if (move === null) {
+        return 'snapback';
+    }
+
+    renderMoveHistory(chess.history());
+    //window.setTimeout(makeBestMove, 250);
+};
+
+var onDragStart = function (source, piece, position, orientation) {
+    if (chess.in_checkmate() === true || chess.in_draw() === true ||
+        piece.search(/^b/) !== -1) {
+        return false;
+    }
+};
 
 function ActivarCheck(evento){
     let check = document.getElementById("IA");
@@ -102,6 +133,7 @@ function transformaJugadas(jugadas){
   //para crear las jugadas con sus listeners
   var div = document.getElementById("listeners"); 
   div.innerHTML = texto;
+  //board.clear();
   return posiciones;
 }
 
@@ -145,6 +177,10 @@ function cargarJugadaAux(n){
   //makeBestMove();
 }
 
+function volverPos(n){
+    chess.load(posiciones[pos]);
+    board.position(posiciones[pos].split(" ")[0]);
+  }
 
 document.addEventListener("DOMContentLoaded",main, false);
 
@@ -333,12 +369,12 @@ var getPieceValue = function (piece, x, y) {
 
 /* board visualization and games state handling */
 
-var onDragStart = function (source, piece, position, orientation) {
+/*var onDragStart = function (source, piece, position, orientation) {
     if (chess.in_checkmate() === true || chess.in_draw() === true ||
         piece.search(/^b/) !== -1) {
         return false;
     }
-};
+};*/
 
 var makeBestMove = function () {
     let check = document.getElementById("IA");
@@ -374,11 +410,11 @@ var renderMoveHistory = function (moves) {
     for (var i = 0; i < moves.length; i = i + 2) {
         historyElement.append('<span>' + moves[i] + ' ' + ( moves[i + 1] ? moves[i + 1] : ' ') + '</span><br>')
     }
-    historyElement.scrollTop(historyElement[0].scrollHeight);
+    //historyElement.scrollTop(historyElement[0].scrollHeight);
 
 };
 //función principal
-var onDrop = function (source, target) {
+/*var onDrop = function (source, target) {
 
     var move = chess.move({
         from: source,
@@ -396,7 +432,7 @@ var onDrop = function (source, target) {
     //muestro la valoración
     var valoration = document.getElementById("valoration");
     valoration.textContent=score;
-};
+};*/
 
 var onSnapEnd = function () {
     board.position(chess.fen());

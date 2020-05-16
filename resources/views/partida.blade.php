@@ -45,6 +45,9 @@
                         <button type="button" id="next" class="btn btn-default" style="background-color: white; margin-top: 5%; width: 100%; border-color: black;">Siguiente 🢚</button>
                     </div>
                 </div>
+                <div class="row" id="div_boton_volver" style="background-color: F6E3DF;align-items: center; justify-content: center;"> 
+                    <button type="button" id="volver" class="btn btn-default" style="background-color: white; margin-top: 5%; width: 95%; border-color: black;">Volver</button>
+                </div>
             </div>
         </div>
     </div>

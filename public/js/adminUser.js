@@ -32,6 +32,11 @@ function insert(add){
         j = i + 1;
         form_inputs[j].value = inputs[i].value;
     }
+    var email = document.getElementById("correo_electronico");
+    if(IsMail(email)==false){
+        alert("El correo debe seguir el formato xxx@yyy.zzz");
+        return;
+    }
     var select = tr.querySelector("select");
     var rol = document.getElementById("rol");
     rol.value = select.value;
@@ -53,4 +58,28 @@ function borrar(x){
     var type = document.getElementById("type");
     type.value = "delete";
     form.submit();
+}
+
+//auxiliares
+function IsMail(email){
+    var correo = email.value;
+    var arroba = false, punto = false, dominio = false;
+    var pos;
+    if(correo[0]!='@'){
+        for(var i = 1; i < correo.length; i++){
+            if(punto){
+                dominio = true;
+            }
+            if(arroba && correo[i]=='.'){
+                punto = true;
+                pos = i;
+            }
+            if(correo[i]=='@'){
+                arroba = true;
+                pos = i;
+            }
+        }
+    }
+    
+    return arroba && punto && dominio;
 }

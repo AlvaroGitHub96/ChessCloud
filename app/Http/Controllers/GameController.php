@@ -73,6 +73,20 @@ class GameController extends Controller
         return $player->id;
     }
 
+    public function ActualizaPlayer($id,$nombre,$apellido,$pais,$elo,$titulo){
+        $players = Player::where('id', 'like', '%'.$id.'%')->get();        
+        //dd($player);
+        foreach ($players as $player){
+            $player->name = $nombre;
+            $player->surname = $apellido;
+            $player->ranking = $elo;
+            $player->country = $pais;
+            $player->title = $titulo;
+
+            $player->save();
+        }
+        
+    }
     public function idJugador($nombre,$apellido,$pais,$elo,$titulo){
         $consulta = DB::table('players')
         ->where('name', '=', $nombre)
@@ -214,81 +228,7 @@ class GameController extends Controller
         $games = DB::table('games')->paginate(10);
         return view('verPartidas')->with('games',$games);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     /*
     public function crearJugadorV2($nombre,$apellido,$elo){
         $player = new Player();
@@ -430,6 +370,14 @@ class GameController extends Controller
     {
         $game = Game::where('id', 'like', '%'.$id.'%')->first();        
         
+        $game->id_white = $this->idJugador($name_white,$surname_white,$country_white,$ranking_white,$title_white);
+        //llamo a actualizar player por si los datos de ese jugador con ese id hubieran cambiado
+        $this->ActualizaPlayer($game->id_white,$name_white,$surname_white,$country_white,$ranking_white,$title_white);
+
+        $game->id_black = $this->idJugador($name_black,$surname_black,$country_black,$ranking_black,$title_black);
+        //llamo a actualizar player por si los datos de ese jugador con ese id hubieran cambiado
+        $this->ActualizaPlayer($game->id_black,$name_black,$surname_black,$country_black,$ranking_black,$title_black);
+
         $game->name_white = $name_white;
         $game->surname_white = $surname_white;
         $game->ranking_white = $ranking_white;
