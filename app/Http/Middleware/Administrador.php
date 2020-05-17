@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
 use Closure;
-use App\Rol_User;
+use App\User;
 
 class Administrador
 {
@@ -19,7 +19,7 @@ class Administrador
     {
         if ( Auth::check())
         {
-        $user = Rol_User::where('user_id', 'like', '%'.Auth::user()->id.'%')->first();
+        $user = User::where('id', '=', Auth::user()->id)->first();
             if($user->rol_id == 2){
                 return $next($request);    
             }
@@ -28,4 +28,17 @@ class Administrador
 
         return redirect('home');
     }
+    /*public function handle($request, Closure $next, $guard = null)
+    {
+        if ( Auth::check())
+        {
+        $user = Rol_User::where('user_id', 'like', '%'.Auth::user()->id.'%')->first();
+            if($user->rol_id == 2){
+                return $next($request);    
+            }
+            
+        }
+
+        return redirect('home');
+    }*/
 }

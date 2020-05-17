@@ -41,21 +41,21 @@ Route::get('/salir', 'UserController@logOut');
 
 //modificar usuario
 Route::get('/modificarUsuario', 'UserController@modificarDatos')->middleware('auth');
-Route::post('/modificarUsuario', 'UserController@update');
+Route::post('/modificarUsuario', 'UserController@update')->middleware('auth');
 
 //lista de partidas de la bd
 Route::get('/partidas', 'GameController@verPartidas');
 //visualizar una partida
-Route::get('/partida/{partida}', 'GameController@partida');
+Route::get('/partida/{partida}', 'GameController@partida')->middleware('auth');
 //visualizar los datos de un jugador
-Route::get('/jugador/{jugador}', 'PlayerController@jugador');
+Route::get('/jugador/{jugador}', 'PlayerController@jugador')->middleware('auth');
 
 //filtrarPartidas
-Route::get('/buscar_partidas', 'GameController@buscar');
+Route::get('/buscar_partidas', 'GameController@buscar')->middleware('auth');
 
 //añadir partida desde la función del programa
-Route::get('/registrarPartida', 'GameController@devolverFormularioPartida');
-Route::post('/registrarPartida', 'GameController@crearPartida');
+Route::get('/registrarPartida', 'GameController@devolverFormularioPartida')->middleware('auth');
+Route::post('/registrarPartida', 'GameController@crearPartida')->middleware('auth');
 //vs IA
 Route::get('/practicar', 'GameController@practicar');
 
@@ -63,12 +63,12 @@ Route::get('/practicar', 'GameController@practicar');
 //Devolver vista administrador
 //Route::get('/admin', 'UserController@adminView');//->middleware('admin');
 //Admin users
-Route::get('/admin/usuarios', 'UserController@adminUser');//->middleware('admin');
-Route::post('/admin/usuarios', 'UserController@execAdmin');
+Route::get('/admin/usuarios', 'UserController@adminUser')->middleware('admin');
+Route::post('/admin/usuarios', 'UserController@execAdmin')->middleware('admin');
 
 //Admin games
-Route::get('/admin/partidas', 'GameController@adminGame');//->middleware('admin');
-Route::post('/admin/partidas', 'GameController@execAdmin');
+Route::get('/admin/partidas', 'GameController@adminGame')->middleware('admin');
+Route::post('/admin/partidas', 'GameController@execAdmin')->middleware('admin');
 
 
 //crud

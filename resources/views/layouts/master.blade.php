@@ -36,16 +36,16 @@
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/practicar">Practicar</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/admin/usuarios">Admin usuarios</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/admin/partidas">Admin partidas</a></li>
+                                    @if(Auth::user()->rol_id == 2)
+                                        <li class="nav-item"><a class="nav-link" href="/admin/usuarios">Admin usuarios</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/admin/partidas">Admin partidas</a></li>
+                                    @endif
                             @else
                                 <li class="nav-item"><a class="nav-link" href="/entrar">Entrar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrar">Registrarse</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/partidas">Partidas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/registrarPartida">Nueva partida</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/practicar">Practicar</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/admin/usuarios">Admin usuarios</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/admin/partidas">Admin partidas</a></li>
                             @endif
                         </ul>
                     </div>
