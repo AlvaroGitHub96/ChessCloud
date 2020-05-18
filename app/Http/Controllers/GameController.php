@@ -74,7 +74,14 @@ class GameController extends Controller
     }
 
     public function ActualizaPlayer($id,$nombre,$apellido,$pais,$elo,$titulo){
-        $players = Player::where('id', 'like', '%'.$id.'%')->get();        
+        $player = Player::where('id', 'like', '%'.$id.'%')->first();
+        $player->name = $nombre;
+        $player->surname = $apellido;
+        $player->ranking = $elo;
+        $player->country = $pais;
+        $player->title = $titulo;
+        $player->save();
+        /*$players = Player::where('id', 'like', '%'.$id.'%')->get();        
         //dd($player);
         foreach ($players as $player){
             $player->name = $nombre;
@@ -84,7 +91,7 @@ class GameController extends Controller
             $player->title = $titulo;
 
             $player->save();
-        }
+        }*/
         
     }
     public function idJugador($nombre,$apellido,$pais,$elo,$titulo){

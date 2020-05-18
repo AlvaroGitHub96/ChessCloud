@@ -18,6 +18,7 @@
                         <span>in {{$game->tournament}}</span>
                     </p>
                     <p>Resultado: {{$result}}</p>
+                    <p id="turno"></p>
                     <p id="movimientos">{{$game->movements}}</p>
                     <p style="visibility: hidden; display: none;" id="movimientos-procesados">{{$game->movements_processed}}</p>
                     <!-- jugadas con los listener -->

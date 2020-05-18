@@ -3,44 +3,52 @@ var board,posiciones;
   var pos = 0;
   //https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/
 function main(){
-  //primero inicio el tablero
-  board = Chessboard('myBoard', {
-      draggable: true,
-      moveSpeed: 'slow',
-      snapbackSpeed: 500,
-      snapSpeed: 100,
-      onChange: makeBestMove,
-      onDrop: onDrop,
-      dropOffBoard: 'trash',
-      position: 'start'
+    //primero inicio el tablero
+    board = Chessboard('myBoard', {
+        draggable: true,
+        moveSpeed: 'slow',
+        snapbackSpeed: 500,
+        snapSpeed: 100,
+        onChange: makeBestMove,
+        onDrop: onDrop,
+        dropOffBoard: 'trash',
+        position: 'start'
     })
-  //ahora creo el array de posiciones para navegar de una a otra
-  var jugadas = document.getElementById("movimientos-procesados").textContent;
-  posiciones = transformaJugadas(jugadas);
-  //ahora muestro sólo lo construido
-  document.getElementById("movimientos").classList.add("invisible");
-  //creo los listeners para cada jugada y de estas ir a su posición
-  var div = document.getElementById("listeners");
-  let spans = div.querySelectorAll("span");
-  for(var i = 0; i < spans.length; i++){
-    spans[i].addEventListener("click",cargarJugada, false);
-  }
-  //inicializo y enlazo los botones siguiente y anterior
-  //next
-  let next = document.getElementById("next");
-  next.addEventListener("click",NextMovement, false);
-  //before
-  let before = document.getElementById("before");
-  before.addEventListener("click",BeforeMovement, false);
-  //volver
-  let volver = document.getElementById("volver");
-  volver.addEventListener("click",volverPos, false);
-  //makeBestMove();
-  let check = document.getElementById("IA");
-  check.value="off";
-  let span = document.getElementById("span");
-  span.addEventListener("click",ActivarCheck, false);
-  chess = new Chess();
+    //turno
+    var turno = document.getElementById("turno");
+    turno.textContent = chess.turn()=="w" ? "juegan blancas" : "juegan negras";
+    //jugada (nº)
+    var volverJugada = document.getElementById("volver");
+    var n = Math.trunc(pos/2) + 1;  
+    var dondeVuelvo = "Volver a la jugada " + n + " donde " + turno.textContent;
+    volverJugada.textContent = dondeVuelvo;
+    //ahora creo el array de posiciones para navegar de una a otra
+    var jugadas = document.getElementById("movimientos-procesados").textContent;
+    posiciones = transformaJugadas(jugadas);
+    //ahora muestro sólo lo construido
+    document.getElementById("movimientos").classList.add("invisible");
+    //creo los listeners para cada jugada y de estas ir a su posición
+    var div = document.getElementById("listeners");
+    let spans = div.querySelectorAll("span");
+    for(var i = 0; i < spans.length; i++){
+        spans[i].addEventListener("click",cargarJugada, false);
+    }
+    //inicializo y enlazo los botones siguiente y anterior
+    //next
+    let next = document.getElementById("next");
+    next.addEventListener("click",NextMovement, false);
+    //before
+    let before = document.getElementById("before");
+    before.addEventListener("click",BeforeMovement, false);
+    //volver
+    let volver = document.getElementById("volver");
+    volver.addEventListener("click",volverPos, false);
+    //makeBestMove();
+    let check = document.getElementById("IA");
+    check.value="off";
+    let span = document.getElementById("span");
+    span.addEventListener("click",ActivarCheck, false);
+    chess = new Chess();
 }
 
 
@@ -138,25 +146,41 @@ function transformaJugadas(jugadas){
 }
 
 function NextMovement(evento){
-  if(pos < posiciones.length) {
-    chess.load(posiciones[++pos]);
-    board.position(posiciones[pos].split(" ")[0]);
-    //makeBestMove();
-  }
-  else{
-    alert("Es la última jugada, no puedes avanzar más.")
-  }
+    if(pos < posiciones.length) {
+        chess.load(posiciones[++pos]);
+        board.position(posiciones[pos].split(" ")[0]);
+        //makeBestMove();
+        //turno
+        var turno = document.getElementById("turno");
+        turno.textContent = chess.turn()=="w" ? "juegan blancas" : "juegan negras";
+        //jugada (nº)
+        var volverJugada = document.getElementById("volver");
+        var n = Math.trunc(pos/2) + 1;  
+        var dondeVuelvo = "Volver a la jugada " + n + " donde " + turno.textContent;
+        volverJugada.textContent = dondeVuelvo;
+    }
+    else{
+        alert("Es la última jugada, no puedes avanzar más.")
+    }
 }
 
 function BeforeMovement(evento){
-  if(pos > 0) {
-    chess.load(posiciones[--pos]);
-    board.position(posiciones[pos].split(" ")[0]);
-    //makeBestMove();
-  }
-  else{
-    alert("Es la primera jugada, no puedes retroceder más.")
-  }
+    if(pos > 0) {
+        chess.load(posiciones[--pos]);
+        board.position(posiciones[pos].split(" ")[0]);
+        //makeBestMove();
+        //turno
+        var turno = document.getElementById("turno");
+        turno.textContent = chess.turn()=="w" ? "juegan blancas" : "juegan negras";
+        //jugada (nº)
+        var volverJugada = document.getElementById("volver");
+        var n = Math.trunc(pos/2) + 1;  
+        var dondeVuelvo = "Volver a la jugada " + n + " donde " + turno.textContent;
+        volverJugada.textContent = dondeVuelvo;
+    }
+    else{
+        alert("Es la primera jugada, no puedes retroceder más.")
+    }
 }
 
 
@@ -168,6 +192,14 @@ function cargarJugada(nodo){
   board.position(posiciones[n].split(" ")[0]);
   pos = n;
   //makeBestMove();
+  //turno
+  var turno = document.getElementById("turno");
+  turno.textContent = chess.turn()=="w" ? "juegan blancas" : "juegan negras";
+  //jugada (nº)
+  var volverJugada = document.getElementById("volver");
+  var n = Math.trunc(pos/2) + 1;  
+  var dondeVuelvo = "Volver a la jugada " + n + " donde " + turno.textContent;
+  volverJugada.textContent = dondeVuelvo;
 }
 
 function cargarJugadaAux(n){
@@ -387,6 +419,22 @@ var makeBestMove = function () {
     else{
         valoration.textContent="Desactivado";
     }
+
+    /*
+    //el color
+    var turno = document.getElementById("turno");
+    if(chess.turn()=="w"){
+        var color = "juegan blancas";
+    }
+    else{
+        var color = "juegan negras";
+    }
+    turno.textContent = color;
+    //jugada (nº)
+    var volverJugada = document.getElementById("volver");
+    var n = Math.trunc(pos/2) + 1;  
+    var dondeVuelvo = "Volver a la jugada " + n + " donde " + turno.textContent;
+    volverJugada.textContent = dondeVuelvo;*/
 };
 
 
