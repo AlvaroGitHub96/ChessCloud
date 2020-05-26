@@ -78,8 +78,8 @@ Route::post('/admin/partidas', 'GameController@execAdmin')->middleware('admin');
 //gestión de errores
 
 Route::any('{catchall}', function(){
-    abort(500);
+    abort(404);
 });
 Route::get('error', function(){
-    abort(500);
+    abort(404);
 });
